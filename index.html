@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="balloons"></div>
+
+    <div class="main-container">
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <h1 class="title">¡Feliz Cumpleaños!</h1>
+                    <div class="cake">
+                        <div class="plate"></div>
+                        <div class="layer bottom"></div>
+                        <div class="layer middle"></div>
+                        <div class="layer top"></div>
+                        <div class="candle"></div>
+                        <div class="flame"></div>
+                    </div>
+                    <p class="message">Toca la tarjeta para descubrir tu sorpresa</p> 
+                    <button class="surprise-btn" id="showPlayerBtn">Ver tu canción <i class="fas fa-music"></i></button>
+                </div>
+                <div class="back">
+                    <button class="flip-card-btn back-flip-btn"><i class="fas fa-sync-alt"></i> Voltear Tarjeta</button>
+                    <div class="letter-closed">
+                        <h2>¡Tienes una carta!</h2>
+                        <div class="envelope">
+                            <div class="envelope-flap"></div>
+                            <div class="envelope-body"></div>
+                        </div>
+                        <div class="letter-info">
+                            <p><strong>De:</strong> <span class="sender-name">Alguien que te quiere</span></p>
+                            <p><strong>Para:</strong> <span class="recipient-name">Una persona especial</span></p>
+                        </div>
+                        <button class="open-letter-btn">Abrir carta</button>
+                    </div>
+
+                    <div class="quiz-container hidden">
+                        <div class="question-card active" id="question1">
+                            <h2>Pregunta 1:</h2>
+                            <p class="question-text" id="question-text-1"></p>
+                            <div class="options" id="options-1">
+                                </div>
+                            <button class="hint-btn" data-question="1"><i class="fas fa-lightbulb"></i> Pista</button>
+                        </div>
+
+                        <div class="question-card hidden" id="question2">
+                            <h2>Pregunta 2:</h2>
+                            <p class="question-text" id="question-text-2"></p>
+                            <div class="options" id="options-2">
+                                </div>
+                            <button class="hint-btn" data-question="2"><i class="fas fa-lightbulb"></i> Pista</button>
+                        </div>
+
+                        <div class="question-card hidden" id="question3">
+                            <h2>Pregunta 3:</h2>
+                            <p class="question-text" id="question-text-3"></p>
+                            <div class="options" id="options-3">
+                                </div>
+                            <button class="hint-btn" data-question="3"><i class="fas fa-lightbulb"></i> Pista</button>
+                            <button class="submit-quiz-btn hidden"><i class="fas fa-check-double"></i> Enviar Respuestas</button>
+                        </div>
+
+                        <div class="quiz-navigation">
+                            <button class="quiz-nav-btn prev-btn" disabled><i class="fas fa-arrow-left"></i> Anterior</button>
+                            <span class="question-number">Pregunta <span id="current-question-number">1</span> de 3</span>
+                            <button class="quiz-nav-btn next-btn"><i class="fas fa-arrow-right"></i> Siguiente</button>
+                        </div>
+
+                        <div class="feedback-message hidden">
+                            <p id="feedback-text"></p>
+                            <button class="retry-quiz-btn hidden"><i class="fas fa-redo"></i> Volver a intentar</button>
+                        </div>
+                    </div>
+
+                    <div class="letter-opened hidden">
+                        <h2 class="name">Para ti</h2>
+                        <div class="letter-content">
+                            <p>Querida <span class="recipient-name">Sofia</span>,</p>
+                            <p>En este día tan especial quiero decirte...</p>
+                            <p>Que cada momento a tu lado es un tesoro invaluable. Tu sonrisa ilumina mis días y tu forma de ser alegra mi corazón.</p>
+                            <p>Espero que este nuevo año de vida te traiga toda la felicidad, salud y amor que mereces. Que todos tus sueños se hagan realidad.</p>
+                            <p class="love-message">¡TE QUIERO MUCHO!</p>
+                            <p>Eres la persona más importante en mi vida.</p>
+                            <p>¡Feliz cumpleaños!</p>
+                        </div>
+                        <div class="hearts">
+                            <div class="heart"></div>
+                            <div class="heart"></div>
+                            <div class="heart"></div>
+                        </div>
+                        <button id="confettiBtn">Música y ¡Celebrar!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="player-card hidden" id="playerCard">
+            <div class="player-header">
+                <h3 id="songTitle">Canción Sorpresa</h3>
+                <button class="close-player" id="closePlayerBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="video-container" id="videoContainer">
+                <video id="customMediaPlayer" width="100%" poster="source/cancion.jpg"></video>
+            </div>
+            <div class="media-player-controls">
+                <div class="progress-bar-area">
+                    <div class="time-display">
+                        <span id="currentTimeDisplay">0:00</span>
+                        <span id="totalDurationDisplay">0:00</span>
+                    </div>
+                    <div class="progress-bar-container" id="progressBarContainer">
+                        <div class="progress-bar-filled" id="progressBarFilled"></div>
+                    </div>
+                </div>
+                <div class="main-controls">
+                    <div class="playback-control-group"> <button class="control-btn" id="playPauseBtn" title="Reproducir"><i class="fas fa-play"></i></button>
+                    </div>
+                    <div class="volume-control-group"> <button class="control-btn" id="volumeDownBtn" title="Bajar volumen"><i class="fas fa-volume-down"></i></button>
+                        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" title="Volumen">
+                        <button class="control-btn" id="volumeUpBtn" title="Subir volumen"><i class="fas fa-volume-up"></i></button>
+                        <button class="control-btn" id="muteToggleBtn" title="Silenciar"><i class="fas fa-volume-up"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="confettiCanvas"></canvas>
+    <canvas id="fireworks"></canvas>
+
+    <audio id="birthdaySong">
+        <source src="source/HappySong.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <div id="hint-modal" class="hint-modal-container hidden">
+        <div class="hint-modal-content">
+            <button id="close-hint-modal" class="close-hint-btn">&times;</button>
+            <h3>Pista</h3>
+            <p id="hint-modal-text"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+    <script src="fireworks.js"></script> </body>
+</html>
