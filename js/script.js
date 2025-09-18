@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const whatsappBtn = document.getElementById('whatsappBtn');
     
     // --- DATOS DE CONTACTO ---
-    const recipientEmail = 'viverocastillo@gmail.com';
-    const whatsappNumber = '522228919841'; // Sin el "+"
+    const recipientEmail = 'viverocastillo0@gmail.com';
+    const whatsappNumber = '522218919841'; // Sin el "+"
 
     // Función para construir el mensaje final basado en los campos llenos
     function buildMessageBody(name, email, message) {
