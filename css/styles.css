@@ -58,7 +58,6 @@ nav {
     height: 70px;
 }
 
-/* MODIFICA ESTA REGLA */
 .logo {
     display: flex;
     align-items: center;
@@ -146,32 +145,42 @@ nav {
 .hero {
     margin-top: 70px;
     height: 90vh;
-    background: linear-gradient(135deg, 
-        rgba(27, 124, 61, 0.9) 0%, 
-        rgba(42, 157, 92, 0.8) 50%,
-        rgba(212, 165, 116, 0.7) 100%),
-        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%23E8F5E9" width="1920" height="1080"/><g opacity="0.1"><circle cx="200" cy="200" r="100" fill="%231B7C3D"/><circle cx="1700" cy="300" r="150" fill="%232A9D5C"/><circle cx="1500" cy="800" r="120" fill="%23D4A574"/><circle cx="400" cy="700" r="80" fill="%231B7C3D"/></g></svg>');
-    background-size: cover;
-    background-position: center;
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
+    color: var(--blanco);
     overflow: hidden;
+    background-image: url('../images/florMuerto/produccion1.webp'); /* <-- RUTA DE TU IMAGEN */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Capa oscura sobre la imagen para que el texto resalte (Definición ÚNICA Y CORRECTA) */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Negro con 40% de opacidad */
+    z-index: 1;
 }
 
 .hero-content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    color: var(--blanco);
     z-index: 2;
     position: relative;
+    text-align: center;
 }
 
 .hero h1 {
     font-size: 3.5em;
     margin-bottom: 20px;
     animation: fadeInUp 1s ease;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
 }
 
 .hero-subtitle {
@@ -179,15 +188,72 @@ nav {
     margin-bottom: 30px;
     opacity: 0.95;
     animation: fadeInUp 1s ease 0.2s backwards;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
 }
 
 .hero-buttons {
     display: flex;
+    justify-content: center; /* Centra los botones */
     gap: 20px;
     flex-wrap: wrap;
     animation: fadeInUp 1s ease 0.4s backwards;
 }
+.hero {
+    margin-top: 70px;
+    height: 90vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--blanco);
+    overflow: hidden;
+    background-image: url('../images/florMuerto/produccion1.jpg'); /* <-- RUTA DE TU IMAGEN */
+    background-size: cover;
+    background-position: center;
+}
 
+/* Capa oscura sobre la imagen para que el texto resalte (Definición ÚNICA Y CORRECTA) */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Negro con 40% de opacidad */
+    z-index: 1;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero-subtitle {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    opacity: 0.95;
+    animation: fadeInUp 1s ease 0.2s backwards;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 20px;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease 0.4s backwards;
+}
 .btn-hero {
     padding: 15px 35px;
     border-radius: 30px;
@@ -195,6 +261,7 @@ nav {
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
+    border: 2px solid transparent; /* Añadido para transiciones suaves */
 }
 
 .btn-hero-primary {
@@ -217,17 +284,29 @@ nav {
 .btn-hero-secondary:hover {
     background: var(--blanco);
     color: var(--verde-principal);
+    transform: translateY(-3px);
+}
+/* ===== ESTILO PARA EL LOGO EN LA PORTADA ===== */
+
+.hero-logo {
+    position: absolute; /* Posicionamiento absoluto respecto a la sección hero */
+    top: 30px; /* Espacio desde arriba */
+    right: 40px; /* Espacio desde la derecha */
+    z-index: 10; /* Se asegura que esté por encima de la capa oscura */
+    width: 18%;       /* El logo ocupará el 18% del ancho de la pantalla */
+    max-width: 140px; /* Pero nunca será más grande que 140px en pantallas muy grandes */
+    min-width: 90px; /* Y nunca será más pequeño que 90px en móviles */
+    height: auto;     /* Mantiene la proporción */
+    border-radius: 15px;
 }
 
-/* Decorative elements */
-.hero::before {
-    content: '🌿';
-    position: absolute;
-    font-size: 300px;
-    opacity: 0.1;
-    top: -100px;
-    right: -100px;
-    animation: float 6s ease-in-out infinite;
+/* Ajuste para pantallas móviles */
+@media (max-width: 768px) {
+    .hero-logo {
+        display: none; /* Ocultamos el logo de la portada en móviles */
+        top: 20px;
+        right: 20px;
+    }
 }
 
 /* FEATURES SECTION */
@@ -445,8 +524,11 @@ nav {
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
-/* FOOTER */
-footer {
+/* =============================================
+   FOOTER - CÓDIGO FINAL Y DEFINITIVO
+   ============================================= */
+
+   footer {
     background: var(--negro);
     color: var(--blanco);
     padding: 50px 20px 20px;
@@ -456,7 +538,7 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 40px;
     margin-bottom: 30px;
 }
@@ -465,32 +547,61 @@ footer {
     color: var(--verde-claro);
     margin-bottom: 20px;
     font-size: 1.2em;
+    text-align: left;
 }
 
-.footer-section p {
+/* --- Estructura para la primera sección (Escritorio) --- */
+.footer-about-body {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo {
+    width: 100px; 
+    height: 100px;
+    border-radius: 15px;
+    flex-shrink: 0;
+}
+
+.footer-about-text p {
     line-height: 1.8;
     opacity: 0.9;
+    margin-bottom: 15px;
 }
 
-.footer-links {
-    list-style: none;
+/* --- Estilos generales --- */
+.footer-links-wrapper { 
+    display: contents; /* Permite que sus hijos se integren al grid principal en desktop */
 }
-
-.footer-links li {
-    margin-bottom: 10px;
+.footer-links { 
+    list-style: none; 
+    padding: 0; 
 }
-
-.footer-links a {
-    color: var(--blanco);
-    text-decoration: none;
-    opacity: 0.9;
-    transition: all 0.3s ease;
+.footer-links li { 
+    margin-bottom: 10px; 
 }
-
-.footer-links a:hover {
-    color: var(--verde-claro);
-    opacity: 1;
-    padding-left: 5px;
+.footer-links a { 
+    color: var(--blanco); 
+    text-decoration: none; 
+    opacity: 0.9; 
+    transition: all 0.3s ease; 
+}
+.footer-links a:hover { 
+    color: var(--verde-claro); 
+    opacity: 1; 
+    padding-left: 5px; 
+}
+.social-icons { 
+    display: flex; 
+    gap: 15px; 
+    margin-top: 10px; 
+}
+.footer-bottom { 
+    text-align: center; 
+    padding-top: 20px; 
+    border-top: 1px solid rgba(255,255,255,0.1); 
+    opacity: 0.8; 
 }
 
 .social-icons {
@@ -586,6 +697,9 @@ footer {
         display: none;
     }
 }
+.page-section {
+    padding-top: 120px; /* 70px de la navbar + 50px de espacio extra */
+}
 .contact-section {
     padding: 80px 20px;
     background: var(--blanco-hueso);
@@ -679,7 +793,61 @@ footer {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
+/* Estilo para el nuevo logo en el footer */
+.footer-logo {
+    width: 120px; /* Puedes ajustar este tamaño si lo necesitas */
+    height: auto; /* Mantiene la proporción para que no se deforme */
+    border-radius: 20px; /* ¡Aquí está la magia de las esquinas redondeadas! */
+    margin: 15px 0; /* Añade un espacio vertical arriba y abajo del logo */
+}
+/* Ajuste responsivo para el logo del footer */
 
+@media (max-width: 768px) {
+    /* Los bloques principales (Sobre Nosotros y el contenedor de enlaces) se apilan */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    /* La sección del logo se apila y centra como pediste */
+    .footer-about {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    /* La fila con logo y texto */
+    .footer-about-body {
+        display: flex;
+        align-items: center;
+        text-align: left; /* El texto dentro de esta fila se alinea a la izquierda */
+        gap: 15px;
+        margin-top: 15px; /* Espacio debajo del título "Vivero Castillo" */
+    }
+
+    .footer-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* El contenedor de enlaces ahora será de una sola columna */
+    .footer-links-wrapper {
+        display: grid;
+        grid-template-columns: 1fr; /* Cambiado de 1fr 1fr */
+        gap: 0; /* Ya no necesitamos el espacio lateral */
+    }
+    /* Ocultamos la sección de Productos en móvil */
+    .footer-links {
+        text-align: left;
+    }
+    /* Ocultamos la sección de Productos en móvil */
+    .footer-links-products {
+        display: none;
+    }
+    
+    .footer-links-quick, .footer-links-products {
+        text-align: center;
+    }
+}
 /* Estilos de Info y Mapa */
 .contact-info-map .contact-info {
     margin-bottom: 30px;
@@ -709,4 +877,283 @@ footer {
     .nav-cta {
         display: none;
     }
+}
+
+
+.seasonal-promo-v2 {
+    margin-top: 10px; 
+    padding: 180px 20px 80px;
+    background-color: #2c2a4a;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Borde decorativo de papel picado */
+.seasonal-promo-v2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background-image: url('../images/adornos/catrina4.webp');
+    
+    background-size: 230px; /* Ajusta este valor si quieres el gap más grande o pequeño */
+    background-repeat: repeat-x;
+    opacity: 0.8;
+}
+
+.seasonal-promo-v2 .promo-grid {
+    display: flex; /* <-- CAMBIO PRINCIPAL: Usamos Flexbox */
+    align-items: center;
+    gap: 50px;
+}
+
+/* El contenedor del texto ocupará 2 partes del espacio */
+.seasonal-promo-v2 .promo-text {
+    flex: 2;
+    min-width: 0; /* Un truco para que Flexbox se comporte bien */
+}
+
+/* El contenedor del carrusel ocupará 1 parte del espacio */
+.seasonal-promo-v2 .promo-carousel-container {
+    flex: 1;
+    min-width: 0; /* Un truco para que Flexbox se comporte bien */
+}
+
+.seasonal-promo-v2 .promo-text {
+    color: var(--blanco);
+}
+
+.seasonal-promo-v2 .promo-title {
+    font-family: var(--font-headings);
+    font-size: 3em;
+    color: var(--amarillo-sol); /* Color amarillo/naranja para el título */
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.seasonal-promo-v2 .promo-subtitle {
+    font-size: 1.3em;
+    color: var(--blanco);
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.seasonal-promo-v2 .promo-text p {
+    font-size: 1.1em;
+    color: var(--blanco);
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+/* =============================================
+   ESTILOS PARA EL NUEVO CARRUSEL PROMOCIONAL
+   ============================================= */
+
+   .promo-carousel-container {
+    position: relative;
+}
+
+.promo-carousel {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    overflow-x: scroll; /* Permite el scroll horizontal */
+    scroll-behavior: smooth;
+    /* Ocultamos la barra de scroll por defecto */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.promo-carousel::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.carousel-card {
+    flex: 0 0 280px; /* Ancho fijo para cada tarjeta */
+    height: 350px; /* Altura fija */
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.carousel-card:hover {
+    transform: translateY(-5px);
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 20px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    color: var(--blanco);
+}
+
+.card-overlay h3 {
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.card-overlay p {
+    font-size: 1em;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Estilos para los botones de navegación */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.carousel-button:hover {
+    background-color: var(--blanco);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-button.prev {
+    left: -15px;
+}
+
+.carousel-button.next {
+    right: -15px;
+}
+
+/* Oculta por defecto el texto para móvil */
+.text-mobile {
+    display: none;
+}
+
+/* Hacerlo responsivo para móviles */
+@media (max-width: 768px) {
+    /* --- REGLAS GENERALES QUE YA TENÍAS --- */
+    .seasonal-promo-v2 .promo-grid {
+        flex-direction: column; /* Apilamos los elementos verticalmente */
+    }
+    .seasonal-promo-v2 .promo-text {
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    
+    /* --- REGLAS PARA AJUSTAR TAMAÑOS --- */
+    .seasonal-promo-v2 {
+        padding-top: 120px; 
+    }
+    .seasonal-promo-v2::before {
+        height: 100px; /* Papel picado más pequeño */
+        background-size: auto 100%; /* <-- AÑADE ESTA LÍNEA */
+
+    }
+    .seasonal-promo-v2 .promo-title {
+        font-size: 2.2em; /* Título un poco más pequeño */
+    }
+
+    /* --- REGLAS PARA INTERCAMBIAR EL TEXTO DESCRIPTIVO --- */
+    .text-desktop {
+        display: none; /* Oculta el texto largo */
+    }
+    .text-mobile {
+        display: block; /* Muestra el texto corto */
+    }
+    /* --- NUEVOS AJUSTES VERTICALES PARA EL CARRUSEL EN MÓVIL --- */
+    .carousel-card {
+        flex: 0 0 260px; /* Hacemos las tarjetas un poco más angostas */
+        height: 350px; /* y un poco más bajas para que no ocupen tanta pantalla */
+    }
+    .carousel-button.prev {
+        left: 5px; /* Acercamos los botones en móvil para que no se salgan */
+    }
+    .carousel-button.next {
+        right: 5px;
+    }
+}
+/* =============================================
+   ESTILOS PARA EL MODAL DE IMÁGENES (LIGHTBOX)
+   ============================================= */
+
+   .modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Se queda fijo en la pantalla */
+    z-index: 1000; /* Se asegura que esté por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permite scroll si la imagen es muy grande */
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro semi-transparente */
+    
+    /* Usamos flex para centrar la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Ocultamos con opacidad para una transición suave */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 8px;
+    /* Animación de zoom al aparecer */
+    animation-name: zoomIn;
+    animation-duration: 0.3s;
+}
+
+/* Animación */
+@keyframes zoomIn {
+    from {transform: scale(0.8)} 
+    to {transform: scale(1)}
+}
+
+/* Botón de Cierre (X) */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #bbb;
+    text-decoration: none;
 }

@@ -46,6 +46,79 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===================================================================
+    // --- LÓGICA PARA EL CARRUSEL PROMOCIONAL (VERSIÓN INFINITA) ---
+    // ===================================================================
+    const promoCarousel = document.querySelector('.promo-carousel');
+    if(promoCarousel) {
+        const prevButton = promoCarousel.parentElement.querySelector('.carousel-button.prev');
+        const nextButton = promoCarousel.parentElement.querySelector('.carousel-button.next');
+        
+        const scrollCarousel = () => {
+            const cardWidth = promoCarousel.querySelector('.carousel-card').offsetWidth + 20; // Ancho de la tarjeta + gap
+            const scrollEnd = promoCarousel.scrollWidth - promoCarousel.clientWidth;
+
+            // Lógica para el botón "Siguiente"
+            nextButton.addEventListener('click', () => {
+                // Si estamos cerca del final, vamos al principio
+                if (promoCarousel.scrollLeft >= scrollEnd - 1) {
+                    promoCarousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    promoCarousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                }
+            });
+
+            // Lógica para el botón "Anterior"
+            prevButton.addEventListener('click', () => {
+                // Si estamos en el principio, vamos al final
+                if (promoCarousel.scrollLeft === 0) {
+                    promoCarousel.scrollTo({ left: scrollEnd, behavior: 'smooth' });
+                } else {
+                    promoCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+                }
+            });
+        };
+
+        // Esperamos a que las imágenes carguen para que el cálculo del ancho sea correcto
+        window.addEventListener('load', scrollCarousel);
+    }
+
+    // ===================================================================
+    // --- LÓGICA PARA EL MODAL DE IMÁGENES (LIGHTBOX) ---
+    // ===================================================================
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        const modalImg = document.getElementById("modalImage");
+        const closeBtn = document.querySelector(".modal-close");
+        const carouselCards = document.querySelectorAll('.carousel-card');
+
+        // Asignamos un evento de clic a cada tarjeta del carrusel
+        carouselCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                modal.classList.add('active');
+                modalImg.src = imgSrc;
+                document.body.style.overflow = 'hidden'; // Evita que la página haga scroll
+            });
+        });
+
+        // Función para cerrar el modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaura el scroll
+        }
+
+        // Clic en el botón "X"
+        closeBtn.addEventListener('click', closeModal);
+
+        // Clic fuera de la imagen (en el fondo oscuro)
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // ===================================================================
     // --- LÓGICA CORREGIDA PARA EL FORMULARIO DE CONTACTO ---
     // ===================================================================
     const contactForm = document.getElementById('contactForm');
