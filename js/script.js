@@ -81,7 +81,43 @@ document.addEventListener('DOMContentLoaded', () => {
         // Esperamos a que las imágenes carguen para que el cálculo del ancho sea correcto
         window.addEventListener('load', scrollCarousel);
     }
+    // ===================================================================
+    // --- LÓGICA PARA EL CARRUSEL DE PÓSTERES EN PÁGINA DE EVENTOS ---
+    // ===================================================================
+    const posterCarousel = document.querySelector('.poster-carousel');
+    if(posterCarousel) {
+        const container = posterCarousel.parentElement;
+        const prevButton = container.querySelector('.carousel-button.prev');
+        const nextButton = container.querySelector('.carousel-button.next');
+        
+        // Funcionalidad de los botones
+        nextButton.addEventListener('click', () => {
+            const cardWidth = posterCarousel.querySelector('.poster-card').offsetWidth + 20;
+            posterCarousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
 
+        prevButton.addEventListener('click', () => {
+            const cardWidth = posterCarousel.querySelector('.poster-card').offsetWidth + 20;
+            posterCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+
+        // Funcionalidad de expandir imagen (Lightbox)
+        const modal = document.getElementById('imageModal');
+        if (modal) {
+            const modalImg = document.getElementById("modalImage");
+            const posterCards = container.querySelectorAll('.poster-card');
+
+            posterCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    modal.classList.add('active');
+                    modalImg.src = imgSrc;
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+        }
+    }
+    
     // ===================================================================
     // --- LÓGICA PARA EL MODAL DE IMÁGENES (LIGHTBOX) ---
     // ===================================================================

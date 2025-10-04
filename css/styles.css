@@ -1157,3 +1157,201 @@ nav {
     color: #bbb;
     text-decoration: none;
 }
+
+/* =============================================
+   DISEÑO FINAL - SECCIÓN PROMOCIÓN DE EVENTOS
+   ============================================= */
+
+   .event-promo {
+    padding: 20px 20px 80px;
+    background-color: #2c2a4a; /* 1. FONDO OSCURO RESTAURADO */
+    position: relative;
+    overflow: hidden;
+}
+
+
+.event-promo-grid {
+    display: grid;
+    /* 2. CARRUSEL MÁS PEQUEÑO: Damos más espacio al texto */
+    grid-template-columns: 1.5fr 1fr; 
+    gap: 50px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* 1. COLORES DE TEXTO RESTAURADOS */
+.event-title {
+    font-size: 3.5em;
+    font-family: var(--font-headings);
+    color: var(--amarillo-sol);
+    margin-bottom: 1rem;
+}
+.event-subtitle {
+    font-size: 1.5em;
+    color: var(--blanco);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+.event-promo-text p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+}
+.event-promo-text strong {
+    color: var(--amarillo-sol);
+}
+
+
+/* --- Estilos para el Carrusel de Pósteres --- */
+.poster-carousel-container {
+    position: relative;
+}
+.poster-carousel {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.poster-carousel::-webkit-scrollbar { 
+    display: none;
+}
+.poster-card {
+    flex: 0 0 80%;
+    max-width: 300px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.poster-card:hover {
+    transform: translateY(-5px);
+}
+.poster-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* --- AJUSTES RESPONSIVOS --- */
+@media (max-width: 768px) {
+    .event-promo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 3. ORDEN EN MÓVIL CORREGIDO */
+    .event-promo-text {
+        text-align: center;
+        order: 1; 
+    }
+    .poster-carousel-container {
+        margin-top: 40px;
+        order: 2; /* <-- Forzamos el carrusel a ser el SEGUNDO elemento */
+    }
+    .event-title {
+        font-size: 2.8em;
+    }
+    .event-promo::before {
+        height: 100px;
+    }
+}
+
+/* =============================================
+   GALERÍA DE CATRINAS (CÓDIGO CORREGIDO Y FINAL)
+   ============================================= */
+   .catrina-gallery {
+    padding: 80px 20px;
+    background-color: #f4f4f7;
+}
+
+.catrina-grid {
+    display: grid;
+    /* CAMBIO 1: Hacemos las tarjetas más pequeñas cambiando el tamaño mínimo */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.catrina-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    /* CAMBIO 1: Reducimos la altura de la tarjeta */
+    height: 320px; 
+    cursor: pointer;
+}
+
+.catrina-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.catrina-card:hover img {
+    transform: scale(1.05); /* Agranda la imagen al pasar el mouse */
+}
+
+.card-content-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    color: var(--blanco);
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s ease;
+}
+
+
+.card-content-overlay h3 {
+    font-size: 1.8em;
+    color: var(--blanco);
+    font-family: var(--font-headings);
+    margin: 0 0 5px 0;
+}
+
+.card-location {
+    font-size: 0.9em;
+    margin: 0;
+    opacity: 0.9;
+}
+
+
+/* --- AJUSTES RESPONSIVOS PARA LA GALERÍA --- */
+@media (max-width: 992px) {
+    /* En tablets, forzamos a 2 columnas */
+    .catrina-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    /* En móviles, mantenemos las 2 columnas como pediste */
+    .catrina-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px; /* Reducimos el espacio entre tarjetas */
+    }
+    .catrina-card {
+        height: 250px; /* Hacemos las tarjetas más pequeñas */
+    }
+    /* Hacemos el texto visible siempre en móvil */
+    .card-content-overlay {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .card-content-overlay h3 {
+        font-size: 1.2em; /* Ajustamos el tamaño del texto */
+    }
+    .card-location {
+        font-size: 0.8em;
+    }
+}
