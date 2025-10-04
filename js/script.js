@@ -3,13 +3,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA PARA EL MENÚ MÓVIL (HAMBURGUESA) ---
     const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
+    const navMenuContainer = document.getElementById('navMenu');
+    const navClose = document.getElementById('navClose');
+    const overlay = document.querySelector('.overlay');
 
-    if (menuToggle && navMenu) {
+    if (menuToggle && navMenuContainer) {
+        // Abrir menú
         menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            navMenuContainer.classList.add('active');
+            overlay.classList.add('active');
         });
+
+        // Función para cerrar el menú
+        const closeMenu = () => {
+            navMenuContainer.classList.remove('active');
+            overlay.classList.remove('active');
+        };
+
+        // Cerrar con el botón "X" o el overlay
+        navClose.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
     }
+
+    // --- LÓGICA PARA RESALTAR EL ENLACE ACTIVO (MÉTODO SIMPLIFICADO Y ROBUSTO) ---
+    const currentUrl = window.location.href;
+    const allNavLinks = document.querySelectorAll('.nav-link');
+
+    allNavLinks.forEach(link => {
+        // Comparamos la URL completa del enlace con la URL actual de la página
+        if (link.href === currentUrl) {
+            link.classList.add('active-link');
+        }
+    });
 
     // --- LÓGICA PARA EL SCROLL SUAVE (SMOOTH SCROLL) ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

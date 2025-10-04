@@ -37,17 +37,20 @@ body {
     line-height: 1.6;
 }
 
-/* NAVBAR */
+
+/* =============================================
+   ESTILOS FINALES Y DEFINITIVOS PARA NAVBAR
+   ============================================= */
+
+/* --- 1. ESTILOS DE ESCRITORIO (BASE) --- */
 nav {
     background: var(--blanco);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
+    z-index: 900;
 }
-
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -57,59 +60,30 @@ nav {
     padding: 0 20px;
     height: 70px;
 }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-img { height: 50px; width: auto; }
+.logo-text { font-size: 1.5em; font-weight: bold; color: var(--verde-principal); }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* <-- AÑADE ESTA LÍNEA para dar espacio */
-    text-decoration: none; 
-    color: var(--verde-principal);
-}
-
-.logo-img {
-    height: 60px; /* Ajusta esta altura según el diseño de tu logo */
-    width: auto;  /* Mantiene la proporción original de la imagen */
-}
-
-/* AÑADE ESTA NUEVA REGLA */
-.logo-text {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--verde-principal);
-}
-
-.nav-menu {
+.desktop-menu {
     display: flex;
     list-style: none;
     gap: 30px;
+    margin: 0; padding: 0;
 }
-
-.nav-menu a {
+.desktop-menu .nav-link {
     color: var(--gris-oscuro);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
     position: relative;
+    padding: 5px 0;
 }
-
-.nav-menu a:hover {
-    color: var(--verde-principal);
-}
-
-.nav-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--verde-principal);
+.desktop-menu .nav-link:hover { color: var(--verde-principal); }
+.desktop-menu .nav-link::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px; background: var(--verde-principal);
     transition: width 0.3s ease;
 }
-
-.nav-menu a:hover::after {
-    width: 100%;
-}
+.desktop-menu .nav-link:hover::after { width: 100%; }
 
 .nav-cta {
     background: var(--verde-principal);
@@ -118,28 +92,18 @@ nav {
     border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
 }
 
-.nav-cta:hover {
-    background: var(--verde-oscuro);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(27, 124, 61, 0.3);
-}
-
-.menu-toggle {
+/* Ocultamos los elementos de móvil en escritorio */
+.menu-toggle, .nav-menu-container {
     display: none;
-    flex-direction: column;
-    cursor: pointer;
 }
-
-.menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--verde-principal);
-    margin: 3px 0;
-    transition: 0.3s;
+.overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 998; opacity: 0;
+    pointer-events: none; transition: opacity 0.3s ease;
 }
+.overlay.active { opacity: 1; pointer-events: auto; }
 
 /* HERO SECTION */
 .hero {
@@ -669,33 +633,125 @@ nav {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: var(--blanco);
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    }
     
-    .nav-menu.active {
-        display: flex;
+    .desktop-menu, .nav-cta {
+        display: none;
     }
     
     .menu-toggle {
         display: flex;
+        flex-direction: column; /* <-- AÑADE ESTA LÍNEA */
+
+        align-items: center;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    .menu-toggle span {
+        width: 25px; height: 3px; background: var(--verde-principal);
+        margin: 3px 0; display: block; transition: 0.3s;
+    }
+
+    .logo-text { font-size: 1.2em; }
+    
+    .nav-menu-container {
+        display: flex;
+        position: fixed;
+        top: 0; right: -100%; width: 75%; max-width: 320px; height: 100vh;
+        background: var(--blanco); box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        flex-direction: column; padding: 2rem; gap: 1.5rem;
+        transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: 1000;
+    }
+    .nav-menu-container.active { right: 0; }
+    
+    .overlay { display: block; }
+
+    .nav-close {
+        display: block; position: absolute; top: 15px; right: 20px;
+        font-size: 2.5rem; color: var(--gris-medio); background: none; border: none; cursor: pointer;
     }
     
-    .hero h1 {
-        font-size: 2.5em;
+    .nav-menu-logo {
+        display: flex; align-items: center; gap: 15px; padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--gris-claro); text-decoration: none;
+        color: var(--gris-oscuro); font-weight: bold; font-size: 1.1em;
     }
+    .nav-menu-logo img { height: 40px; width: 40px; border-radius: 8px; }
     
-    .nav-cta {
+    .mobile-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .mobile-menu .nav-link {
+        display: flex; align-items: center; gap: 15px; color: var(--gris-oscuro);
+        font-size: 1.2rem; font-weight: 600; padding: 8px; border-radius: 12px;
+        transition: background 0.3s, color 0.3s;
+    }
+    .nav-icon-wrapper {
+        display: flex; align-items: center; justify-content: center; padding: 8px;
+        background-color: #f4f4f7; border-radius: 10px; transition: all 0.3s ease;
+    }
+    .mobile-menu .nav-link svg { display: block; width: 24px; height: 24px; stroke: var(--gris-oscuro); }
+
+    .mobile-menu .nav-link:hover { background: var(--verde-pastel); color: var(--verde-principal); text-decoration: none; }
+    .mobile-menu .nav-link:hover .nav-icon-wrapper { background: var(--verde-principal); }
+    .mobile-menu .nav-link:hover svg { stroke: var(--blanco); }
+    .mobile-menu .nav-link.active-link { background: var(--verde-pastel); color: var(--verde-oscuro); font-weight: bold; }
+    .mobile-menu .nav-link.active-link .nav-icon-wrapper { background: var(--verde-principal); }
+    .mobile-menu .nav-link.active-link svg { stroke: var(--blanco); }
+    /* --- Portada Principal (Página de Inicio) --- */
+    .hero-logo {
         display: none;
     }
+
+    /* --- Sección de Temporada (Página de Inicio) --- */
+    .seasonal-promo-v2 .promo-grid {
+        grid-template-columns: 1fr;
+    }
+    .seasonal-promo-v2 .promo-text {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .seasonal-promo-v2 {
+        padding-top: 120px; 
+    }
+    .seasonal-promo-v2::before {
+        height: 100px;
+        background-size: auto 100%;
+    }
+    .seasonal-promo-v2 .promo-title {
+        font-size: 2.2em;
+    }
+    .text-desktop { display: none; }
+    .text-mobile { display: block; }
+
+    .promo-carousel-container { width: 100%; margin: 0 auto; }
+    .carousel-card { flex: 0 0 75%; height: 320px; }
+    .carousel-button { width: 35px; height: 35px; font-size: 20px; }
+    .carousel-button.prev { left: 5px; }
+    .carousel-button.next { right: 5px; }
+
+    /* --- Página de Eventos --- */
+    .event-promo-grid { grid-template-columns: 1fr; }
+    .event-promo-text { text-align: center; order: 1; }
+    .poster-carousel-container { margin-top: 40px; order: 2; }
+    .event-title { font-size: 2.8em; }
+    .event-promo::before { height: 100px; }
+    .event-promo { padding-bottom: 40px; }
+    .catrina-gallery { padding-top: 40px; }
+
+    /* --- Galería de Catrinas (Página de Eventos) --- */
+    .catrina-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+    .catrina-card { height: 250px; }
+    .card-content-overlay { opacity: 1; transform: translateY(0); }
+    .card-content-overlay h3 { font-size: 1.2em; }
+    .card-location { font-size: 0.8em; }
+
+    /* --- Footer --- */
+    .footer-content { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .footer-about { grid-column: 1 / -1; flex-direction: row; text-align: left; align-items: flex-start; margin-bottom: 30px; }
+    .footer-about .footer-logo { width: 80px; height: 80px; }
+    .footer-links-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .footer-links-products { display: none; } /* Oculta la sección de productos */
+    .footer-links-wrapper { grid-template-columns: 1fr; } /* Hace que "Enlaces Rápidos" ocupe todo el ancho */
+    .footer-links-quick, .footer-links-products { text-align: center; }
 }
 .page-section {
     padding-top: 120px; /* 70px de la navbar + 50px de espacio extra */
