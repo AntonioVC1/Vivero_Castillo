@@ -879,139 +879,62 @@ nav {
     }
 }
 
+/* ==========================================================
+   DISEÑO FINAL Y DEFINITIVO - SECCIÓN DÍA DE MUERTOS
+   ========================================================== */
 
+/* --- ESTILOS POR DEFECTO (MÓVIL) --- */
 .seasonal-promo-v2 {
-    margin-top: 10px; 
-    padding: 180px 20px 80px;
+    padding: 120px 20px 80px;
     background-color: #2c2a4a;
     position: relative;
     overflow: hidden;
 }
-
-/* Borde decorativo de papel picado */
 .seasonal-promo-v2::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 180px;
+    height: 100px;
     background-image: url('../images/adornos/catrina4.webp');
-    
-    background-size: 230px; /* Ajusta este valor si quieres el gap más grande o pequeño */
+    background-size: auto 100%;
     background-repeat: repeat-x;
     opacity: 0.8;
 }
 
-.seasonal-promo-v2 .promo-grid {
-    display: flex; /* <-- CAMBIO PRINCIPAL: Usamos Flexbox */
-    align-items: center;
-    gap: 50px;
-}
-
-/* El contenedor del texto ocupará 2 partes del espacio */
 .seasonal-promo-v2 .promo-text {
-    flex: 2;
-    min-width: 0; /* Un truco para que Flexbox se comporte bien */
-}
-
-/* El contenedor del carrusel ocupará 1 parte del espacio */
-.seasonal-promo-v2 .promo-carousel-container {
-    flex: 1;
-    min-width: 0; /* Un truco para que Flexbox se comporte bien */
-}
-
-.seasonal-promo-v2 .promo-text {
+    text-align: center;
     color: var(--blanco);
+    margin-bottom: 40px; 
 }
-
+.seasonal-promo-v2 .promo-text .btn-hero {
+    margin-top: 20px;
+}
 .seasonal-promo-v2 .promo-title {
     font-family: var(--font-headings);
-    font-size: 3em;
-    color: var(--amarillo-sol); /* Color amarillo/naranja para el título */
+    font-size: 2.2em;
+    color: var(--amarillo-sol);
     margin-bottom: 20px;
     line-height: 1.2;
 }
+.text-desktop { display: none; }
+.text-mobile { display: block; }
 
-.seasonal-promo-v2 .promo-subtitle {
-    font-size: 1.3em;
-    color: var(--blanco);
-    opacity: 0.9;
-    margin-bottom: 20px;
-}
-
-.seasonal-promo-v2 .promo-text p {
-    font-size: 1.1em;
-    color: var(--blanco);
-    margin-bottom: 30px;
-    opacity: 0.8;
-}
-
-/* =============================================
-   ESTILOS PARA EL NUEVO CARRUSEL PROMOCIONAL
-   ============================================= */
-
-   .promo-carousel-container {
-    position: relative;
-}
-
-.promo-carousel {
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    overflow-x: scroll; /* Permite el scroll horizontal */
-    scroll-behavior: smooth;
-    /* Ocultamos la barra de scroll por defecto */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-}
-.promo-carousel::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
-
-.carousel-card {
-    flex: 0 0 280px; /* Ancho fijo para cada tarjeta */
-    height: 350px; /* Altura fija */
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
-
-.carousel-card:hover {
-    transform: translateY(-5px);
-}
-
-.carousel-card img {
+.promo-carousel-container {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    margin: 0 auto;
+    position: relative;
 }
+.promo-carousel { display: flex; gap: 20px; padding: 10px; overflow-x: scroll; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+.promo-carousel::-webkit-scrollbar { display: none; }
+.carousel-card { flex: 0 0 75%; height: 320px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+.carousel-card:hover { transform: translateY(-5px); }
+.carousel-card img { width: 100%; height: 100%; object-fit: cover; }
+.card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 20px 20px; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); color: var(--blanco); }
+.card-overlay h3 { font-size: 1.5em; font-weight: 600; margin: 0 0 5px 0; }
+.card-overlay p { font-size: 1em; margin: 0; opacity: 0.9; }
 
-.card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 40px 20px 20px;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-    color: var(--blanco);
-}
-
-.card-overlay h3 {
-    font-size: 1.5em;
-    margin: 0 0 5px 0;
-    font-weight: 600;
-}
-
-.card-overlay p {
-    font-size: 1em;
-    margin: 0;
-    opacity: 0.9;
-}
-
-/* Estilos para los botones de navegación */
 .carousel-button {
     position: absolute;
     top: 50%;
@@ -1019,9 +942,9 @@ nav {
     background-color: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
     font-weight: bold;
     color: #333;
     cursor: pointer;
@@ -1029,67 +952,44 @@ nav {
     z-index: 10;
     transition: all 0.2s ease;
 }
+.carousel-button:hover { background-color: var(--blanco); transform: translateY(-50%) scale(1.1); }
 
-.carousel-button:hover {
-    background-color: var(--blanco);
-    transform: translateY(-50%) scale(1.1);
-}
+/* FIX 2: Posición de botones corregida para móvil */
+.carousel-button.prev { left: 15px; }
+.carousel-button.next { right: 15px; }
 
-.carousel-button.prev {
-    left: -15px;
-}
 
-.carousel-button.next {
-    right: -15px;
-}
+/* --- ESTILOS QUE SE APLICAN SOLO EN PANTALLAS ANCHAS (ESCRITORIO) --- */
+@media (min-width: 769px) {
+    
+    .seasonal-promo-v2 { padding-top: 180px; }
+    .seasonal-promo-v2::before { height: 150px; background-size: 300px; }
 
-/* Oculta por defecto el texto para móvil */
-.text-mobile {
-    display: none;
-}
-
-/* Hacerlo responsivo para móviles */
-@media (max-width: 768px) {
-    /* --- REGLAS GENERALES QUE YA TENÍAS --- */
     .seasonal-promo-v2 .promo-grid {
-        flex-direction: column; /* Apilamos los elementos verticalmente */
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* <- Layout 50/50 */
+        gap: 50px;
+        align-items: center;
     }
-    .seasonal-promo-v2 .promo-text {
-        text-align: center;
-        margin-bottom: 0px;
+
+    .seasonal-promo-v2 .promo-text { text-align: left; margin-bottom: 0; }
+    .seasonal-promo-v2 .promo-title { font-size: 3em; }
+
+    .text-desktop { display: block; }
+    .text-mobile { display: none; }
+    
+    /* FIX 1: Truco para que el grid se comporte */
+    .seasonal-promo-v2 .promo-text,
+    .seasonal-promo-v2 .promo-carousel-container {
+        min-width: 0;
     }
     
-    /* --- REGLAS PARA AJUSTAR TAMAÑOS --- */
-    .seasonal-promo-v2 {
-        padding-top: 120px; 
-    }
-    .seasonal-promo-v2::before {
-        height: 100px; /* Papel picado más pequeño */
-        background-size: auto 100%; /* <-- AÑADE ESTA LÍNEA */
-
-    }
-    .seasonal-promo-v2 .promo-title {
-        font-size: 2.2em; /* Título un poco más pequeño */
-    }
-
-    /* --- REGLAS PARA INTERCAMBIAR EL TEXTO DESCRIPTIVO --- */
-    .text-desktop {
-        display: none; /* Oculta el texto largo */
-    }
-    .text-mobile {
-        display: block; /* Muestra el texto corto */
-    }
-    /* --- NUEVOS AJUSTES VERTICALES PARA EL CARRUSEL EN MÓVIL --- */
-    .carousel-card {
-        flex: 0 0 260px; /* Hacemos las tarjetas un poco más angostas */
-        height: 350px; /* y un poco más bajas para que no ocupen tanta pantalla */
-    }
-    .carousel-button.prev {
-        left: 5px; /* Acercamos los botones en móvil para que no se salgan */
-    }
-    .carousel-button.next {
-        right: 5px;
-    }
+    .carousel-card { flex: 0 0 280px; height: 350px; }
+    .carousel-button { width: 40px; height: 40px; font-size: 24px; }
+    
+    /* FIX 2: Posición de botones corregida para escritorio */
+    .carousel-button.prev { left: 0; }
+    .carousel-button.next { right: 0; }
 }
 /* =============================================
    ESTILOS PARA EL MODAL DE IMÁGENES (LIGHTBOX)
@@ -1173,7 +1073,7 @@ nav {
 .event-promo-grid {
     display: grid;
     /* 2. CARRUSEL MÁS PEQUEÑO: Damos más espacio al texto */
-    grid-template-columns: 1.5fr 1fr; 
+    grid-template-columns: 1fr 1fr; 
     gap: 50px;
     align-items: center;
     position: relative;
@@ -1185,19 +1085,17 @@ nav {
     font-size: 3.5em;
     font-family: var(--font-headings);
     color: var(--amarillo-sol);
-    margin-bottom: 1rem;
 }
 .event-subtitle {
     font-size: 1.5em;
     color: var(--blanco);
-    margin-bottom: 1.5rem;
     font-weight: 500;
 }
 .event-promo-text p {
     font-size: 1.1em;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
 }
 .event-promo-text strong {
     color: var(--amarillo-sol);
@@ -1243,6 +1141,7 @@ nav {
 @media (max-width: 768px) {
     .event-promo-grid {
         grid-template-columns: 1fr;
+        
     }
 
     /* 3. ORDEN EN MÓVIL CORREGIDO */
@@ -1251,7 +1150,7 @@ nav {
         order: 1; 
     }
     .poster-carousel-container {
-        margin-top: 40px;
+        margin-top: 0px;
         order: 2; /* <-- Forzamos el carrusel a ser el SEGUNDO elemento */
     }
     .event-title {
@@ -1259,6 +1158,12 @@ nav {
     }
     .event-promo::before {
         height: 100px;
+    }
+    .event-promo {
+        padding-bottom: 0px; 
+    }
+    .catrina-gallery {
+        padding-top: 40px; /* Reducimos el espacio superior de la galería */
     }
 }
 
