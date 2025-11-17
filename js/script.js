@@ -1,6 +1,19 @@
 // Espera a que todo el contenido del DOM esté cargado
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- INICIO: INTERRUPTOR GLOBAL DE PRECIOS ---
+    //
+    //  CAMBIA ESTA LÍNEA:
+    //  true  = Mostrar precios
+    //  false = Ocultar precios
+    //
+    const MOSTRAR_PRECIOS = false; 
+    //
+    // --- FIN DEL INTERRUPTOR ---
+
+    if (!MOSTRAR_PRECIOS) {
+        document.body.classList.add('precios-ocultos');
+    }
     // --- LÓGICA PARA EL MENÚ MÓVIL (HAMBURGUESA) ---
     const menuToggle = document.getElementById('menuToggle');
     const navMenuContainer = document.getElementById('navMenu');
@@ -23,6 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cerrar con el botón "X" o el overlay
         navClose.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
+    }
+
+    // --- CÓDIGO NUEVO PARA EL CONTADOR DE FAVORITOS ---
+    const favBadge = document.getElementById('fav-badge');
+    if (favBadge) {
+        try {
+            const favs = localStorage.getItem('vivero_favoritos');
+            const favCount = favs ? JSON.parse(favs).length : 0;
+            favBadge.textContent = favCount;
+            favBadge.style.display = favCount > 0 ? 'flex' : 'none';
+        } catch (e) {
+            console.error('Error al leer favoritos:', e);
+        }
     }
 
     // --- LÓGICA PARA RESALTAR EL ENLACE ACTIVO (MÉTODO SIMPLIFICADO Y ROBUSTO) ---
@@ -144,39 +170,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ===================================================================
-    // --- LÓGICA PARA EL MODAL DE IMÁGENES (LIGHTBOX) ---
-    // ===================================================================
-    const modal = document.getElementById('imageModal');
-    if (modal) {
-        const modalImg = document.getElementById("modalImage");
-        const closeBtn = document.querySelector(".modal-close");
-        const carouselCards = document.querySelectorAll('.carousel-card');
+// --- LÓGICA PARA EL MODAL DE IMÁGENES (LIGHTBOX) ---
+// ===================================================================
+const modal = document.getElementById('imageModal');
+if (modal) {
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = modal.querySelector(".modal-close");
+    // LÍNEA MODIFICADA: Ahora busca ambos tipos de tarjetas
+    const cardsToListen = document.querySelectorAll('.carousel-card, .catrina-card');
 
-        // Asignamos un evento de clic a cada tarjeta del carrusel
-        carouselCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const imgSrc = this.querySelector('img').src;
-                modal.classList.add('active');
-                modalImg.src = imgSrc;
-                document.body.style.overflow = 'hidden'; // Evita que la página haga scroll
-            });
+    // Asignamos un evento de clic a cada tarjeta encontrada
+    cardsToListen.forEach(card => {
+        card.addEventListener('click', function() {
+            const imgSrc = this.querySelector('img').src;
+            modal.classList.add('active');
+            modalImg.src = imgSrc;
+            document.body.style.overflow = 'hidden'; // Evita que la página haga scroll
         });
+    });
 
-        // Función para cerrar el modal
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restaura el scroll
-        }
+    // Función para cerrar el modal
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restaura el scroll
+    }
 
-        // Clic en el botón "X"
+    // Clic en el botón "X"
+    if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
+    }
 
-        // Clic fuera de la imagen (en el fondo oscuro)
-        modal.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
+    // Clic fuera de la imagen (en el fondo oscuro)
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
     }
     
     // ===================================================================

@@ -271,6 +271,12 @@ nav {
         top: 20px;
         right: 20px;
     }
+    .hero h1 {
+        font-size: 2.9em;
+        margin-bottom: 20px;
+        animation: fadeInUp 1s ease;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
 }
 
 /* FEATURES SECTION */
@@ -1315,4 +1321,1263 @@ nav {
     .card-location {
         font-size: 0.8em;
     }
+}
+
+/* =============================================
+   NUEVOS ESTILOS DEL CATÁLOGO DE PRODUCTOS (V2)
+   ============================================= */
+
+   .catalogo-container-v2 {
+    padding: 30px 20px;
+    background-color: var(--blanco-hueso); /* Color de fondo claro como en la imagen */
+}
+
+/* --- Barra de Búsqueda --- */
+.search-bar-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gris-medio);
+}
+#search-bar {
+    width: 100%;
+    padding: 14px 20px 14px 50px;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: 1px solid var(--gris-claro);
+    background: var(--blanco);
+    transition: all 0.3s ease;
+}
+#search-bar:focus {
+    outline: none;
+    border-color: var(--verde-principal);
+    box-shadow: 0 0 0 3px var(--verde-pastel);
+}
+
+/* --- Filtros (Chips) --- */
+.filter-chips-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* Permite scroll horizontal en móvil */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    scrollbar-width: none; /* Oculta scrollbar en Firefox */
+}
+.filter-chips-container::-webkit-scrollbar {
+    display: none; /* Oculta scrollbar en Chrome/Safari */
+}
+.filtro-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--gris-oscuro);
+    background: var(--blanco);
+    border: 1px solid var(--gris-claro);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Evita que el texto se parta */
+}
+.filtro-btn:hover {
+    background: var(--verde-pastel);
+}
+.filtro-btn.active {
+    background: var(--verde-principal);
+    color: var(--blanco);
+    border-color: var(--verde-principal);
+}
+.filtro-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* --- Contador de Productos --- */
+.product-counter {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--gris-oscuro);
+    margin-bottom: 20px;
+}
+
+/* --- Grid de Productos (Móvil: 2 columnas) --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* --- Nuevas Tarjetas de Producto --- */
+.product-card-v2 {
+    background: var(--blanco);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+.product-card-v2:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.card-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Proporción 1:1 para la imagen */
+}
+.card-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.heart-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--rosa-flor);
+    backdrop-filter: blur(2px);
+}
+.heart-btn svg {
+    width: 18px;
+    height: 18px;
+}
+.card-info-container {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.card-nombre {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--negro);
+    margin-bottom: 4px;
+}
+.card-descripcion {
+    font-size: 0.9em;
+    color: var(--gris-medio);
+    margin-bottom: 8px;
+}
+.card-rating {
+    margin-bottom: 8px;
+}
+.card-rating svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 2px;
+}
+.star-filled {
+    fill: var(--amarillo-sol);
+    stroke: var(--amarillo-sol);
+}
+.star-empty {
+    fill: none;
+    stroke: var(--gris-claro);
+}
+.card-precio {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--verde-principal);
+    margin-top: auto; /* Empuja el precio al fondo */
+}
+.no-productos {
+    text-align: center;
+    font-size: 1.1em;
+    color: var(--gris-medio);
+    padding: 40px;
+    grid-column: 1 / -1; /* Ocupa todo el ancho del grid */
+}
+
+/* --- Ajustes para Escritorio (wrap) --- */
+@media (min-width: 600px) {
+    .product-grid {
+        /* Se ajusta a 3, 4, o más columnas */
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+@media (min-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+.catalogo-title {
+    text-align: center;
+    font-size: 2.5em;
+    color: var(--verde-principal);
+    margin-bottom: 30px;
+}
+
+/* =============================================
+   ESTILOS FINALES Y COMPLETOS PARA TODO EL SISTEMA DE MODALES
+   ============================================= */
+
+/* --- 1. MODAL DE AMPLIACIÓN (LIGHTBOX) --- */
+/* (El que ya tenías, pero con el z-index corregido) */
+.modal {
+    display: none;
+    position: fixed;
+    /* Z-INDEX MÁS ALTO: para que aparezca sobre el modal de detalles */
+    z-index: 1004; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 8px;
+    animation-name: zoomIn;
+    animation-duration: 0.3s;
+}
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 1005; /* Encima de la imagen */
+}
+.modal-close:hover,
+.modal-close:focus {
+    color: #bbb;
+}
+@keyframes zoomIn {
+    from {transform: scale(0.8)} 
+    to {transform: scale(1)}
+}
+
+/* --- 2. MODAL DE DETALLES DE PRODUCTO --- */
+.product-detail-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 1001; opacity: 0;
+    pointer-events: none; transition: opacity 0.3s ease;
+}
+.product-detail-overlay.active { opacity: 1; pointer-events: auto; }
+
+.product-detail-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1002; display: flex; justify-content: center;
+    align-items: center; /* Alineado abajo para la animación en móvil */
+    pointer-events: none; opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.product-detail-modal.active { opacity: 1; pointer-events: auto; }
+
+/* Contenido del Modal */
+.product-detail-modal .modal-content {
+    background: var(--blanco);
+    width: 100%;
+    max-width: 600px; /* Ancho base para escritorio */
+    box-shadow: 0 -5px 30px rgba(0,0,0,0.2);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    
+    /* --- AJUSTE MÓVIL "FLOTANTE" --- */
+    margin: 20px 15px 20px 15px; /* Margen superior e inferior */
+    height: calc(100vh - 40px);
+    border-radius: 20px;
+    overflow: auto; /* Scroll dentro del contenido */
+}
+.product-detail-modal.active .modal-content {
+    transform: translateY(0);
+}
+
+/* --- Cabecera del Modal (Galería) --- */
+.modal-header {
+    background: var(--verde-principal);
+    position: relative;
+    border-radius: 20px 20px 0 0;
+    /* --- CORRECCIÓN: Espacio para el botón "Atrás" --- */
+    padding: 80px 20px 20px 20px;
+}
+.modal-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--blanco);
+    z-index: 10;
+}
+
+.modal-image-gallery {
+    display: flex;
+    gap: 15px;
+    height: 300px;
+}
+.gallery-thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    flex-shrink: 0;
+    /* Estilos para ocultar la barra de scroll */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE */
+}
+.gallery-thumbnails::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+.gallery-thumbnails img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+.gallery-thumbnails img:hover { border-color: rgba(255,255,255,0.7); }
+.gallery-thumbnails img.active { border-color: var(--blanco); }
+
+.gallery-main-image {
+    flex-grow: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   
+}
+.gallery-main-image img {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    cursor: zoom-in;
+    border-radius: 5%;
+}
+
+/* --- Cuerpo del Modal --- */
+.modal-body {
+    padding: 24px 24px 40px 24px;
+    background: var(--blanco-hueso);
+}
+#modal-nombre { font-size: 2em; font-weight: 700; color: var(--negro); margin: 0; }
+#modal-nombre-cientifico { font-size: 1em; color: var(--gris-medio); font-style: italic; margin-bottom: 24px; }
+.modal-actions {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--blanco); padding: 16px; border-radius: 12px;
+    margin-bottom: 24px; border: 1px solid var(--gris-claro);
+}
+.modal-actions .label { font-size: 0.9em; color: var(--gris-medio); margin-bottom: 4px; }
+.modal-actions .price { font-size: 2em; font-weight: 700; color: var(--verde-principal); }
+.heart-btn-modal {
+    width: 48px; height: 48px; border: 1px solid var(--gris-claro);
+    border-radius: 12px; background: var(--blanco);
+    color: var(--rosa-flor); cursor: pointer;
+}
+.heart-btn-modal svg { width: 24px; height: 24px; }
+
+/* --- INICIA EL BLOQUE QUE DEBES PEGAR --- */
+.modal-info-grid {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* 1 columna en móvil */
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.modal-info-box {
+    padding: 16px 10px; 
+    border-radius: 12px; /* Bordes suaves */
+    border: 1px solid var(--gris-claro);
+    text-align: center;
+    background-color: var(--blanco);
+    overflow: hidden; 
+    white-space: normal; /* Permitir que el texto se ajuste */
+    word-wrap: break-word; /* Para palabras largas */
+}
+
+.info-icon-container {
+    margin-bottom: 8px;
+}
+
+.info-icon-container svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* CAMBIAMOS .label POR .info-title */
+.info-title {
+    font-size: 1em;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    /* El color se define por ID */
+}
+
+/* CAMBIAMOS .value POR .info-value */
+.info-value { 
+    font-size: 0.85em;
+    color: var(--gris-oscuro); /* Color del texto de descripción */
+    line-height: 1.5;   
+    margin: 0;
+    height: auto; /* La altura será natural */
+    overflow: visible;
+}
+/* =============================================
+   AJUSTES PARA MÓVILES (395px o menos)
+   ============================================= */
+   @media (max-width: 395px) {
+
+    /* 1. Botones de acción más pequeños */
+    .modal-actions .heart-btn-modal {
+        width: 42px;
+        height: 42px;
+    }
+
+    .btn-modal-cotizar-sm {
+        height: 42px;
+        padding: 0 12px;
+        gap: 6px;
+    }
+
+    /* Hacemos el texto y el icono del botón de cotizar más pequeños */
+    .btn-modal-cotizar-sm .text-mobile {
+        font-size: 0.9em; /* Reducimos el texto "Cotizar" */
+    }
+    
+    .btn-modal-cotizar-sm svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* 2. Info-Grid a 1 columna y alineado a la izquierda */
+    .modal-info-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 10px;
+    }
+
+    .modal-info-box {
+        text-align: left; /* Alinea todo a la izquierda */
+        padding: 16px; /* Un padding más estándar */
+    }
+
+    /* Alineamos el icono y el título para que se vean mejor */
+    .info-icon-container {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+    }
+    .info-title {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 8px;
+    }
+    .info-value {
+        margin-top: 8px; /* Damos un pequeño espacio */
+    }
+}
+
+/* --- Colores Específicos --- */
+
+/* Luz */
+#info-luz {
+    background-color: #fffbf0;
+    border-color: #fceecb;
+}
+#info-luz .info-icon-container svg,
+#info-luz .info-title {
+    color: #f59e0b; /* Naranja/Amarillo */
+}
+
+/* Riego */
+#info-riego {
+    background-color: #f7f9ff;
+    border-color: #dee6fd;
+}
+#info-riego .info-icon-container svg,
+#info-riego .info-title {
+    color: #3b82f6; /* Azul */
+}
+
+/* Sustrato */
+#info-sustrato {
+    background-color: #f6fff9;
+    border-color: #dcfce7;
+}
+#info-sustrato .info-icon-container svg,
+#info-sustrato .info-title {
+    color: #16a34a; /* Verde */
+}
+/* --- TERMINA EL BLOQUE QUE DEBES PEGAR --- */
+
+.modal-care-list, .modal-facts-box {
+    background: var(--blanco); padding: 20px; border-radius: 12px;
+    margin-bottom: 24px; border: 1px solid var(--gris-claro);
+}
+.modal-care-list h3, .modal-facts-box h3 {
+    font-size: 1.2em; font-weight: 700; color: var(--verde-oscuro);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+}
+.modal-care-list ul, .modal-facts-box ul { list-style: none; padding: 0; margin: 0; }
+.modal-care-list li {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--blanco-hueso); padding: 12px; border-radius: 8px;
+    margin-bottom: 8px; font-size: 0.95em;
+}
+.modal-care-list li span {
+    flex-shrink: 0; width: 24px; height: 24px;
+    background: var(--verde-principal); color: var(--blanco);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.8em; font-weight: 700;
+}
+.modal-facts-box li {
+    font-size: 0.95em; padding-left: 1.5em; position: relative;
+    margin-bottom: 10px;
+}
+.modal-facts-box li::before {
+    content: '🌱'; position: absolute; left: 0; top: 0;
+}
+
+/* --- AJUSTE PARA ESCRITORIO (1 COLUMNA APILADA) --- */
+@media (min-width: 769px) {
+    .product-detail-modal {
+        align-items: center; /* Centra el modal verticalmente */
+    }
+    .product-detail-modal .modal-content {
+        max-width: 750px;
+        height: auto;
+        max-height: 85vh; /* Altura máxima */
+        border-radius: 20px;
+        transform: translateY(0);
+        margin: auto; /* Centrado, sin márgenes "flotantes" */
+        overflow: auto; /* <-- CORRECCIÓN: El modal COMPLETO se desplaza */
+        display: block; /* <-- CORRECCIÓN: Apila header y body */
+    }
+    .modal-body {
+        overflow-y: visible; /* <-- CORRECCIÓN: Quita el scroll de solo el body */
+        max-height: none; /* <-- CORRECCIÓN: Quita la altura fija del body */
+    }
+    .modal-header { flex-basis: auto; }
+    .modal-body { flex-basis: auto; }
+    .modal-info-grid {
+        /* Vuelve a 2 columnas en escritorio */
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+/* =============================================
+   BLOQUE DEFINITIVO v3 (CON ICONO EN MÓVIL)
+   ============================================= */
+
+/* 3. Estilo BASE del botón de cotizar (Móvil) */
+.btn-modal-cotizar-sm {
+    /* Apariencia de botón */
+    background-color: var(--verde-principal);
+    color: var(--blanco);
+    border-radius: 12px; 
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    
+    /* === AJUSTE DE ESPACIADO (MÓVIL) === */
+    height: 48px;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px; /* Padding general */
+    gap: 8px; /* Espacio entre icono y texto */
+    font-size: 1em; /* Tamaño de texto móvil */
+}
+.btn-modal-cotizar-sm:hover { background-color: var(--verde-oscuro); }
+.btn-modal-cotizar-sm:active { transform: scale(0.98); }
+
+/* --- LÓGICA DE TEXTO (MÓVIL) --- */
+.btn-modal-cotizar-sm svg {
+    display: inline-block; /* MUESTRA el icono en móvil */
+}
+.btn-modal-cotizar-sm .text-desktop {
+    display: none; /* OCULTA texto largo en móvil */
+}
+.btn-modal-cotizar-sm .text-mobile {
+    display: inline; /* MUESTRA "Cotizar" en móvil */
+}
+
+
+/* --- LÓGICA ESCRITORIO (769px+) --- */
+@media (min-width: 769px) {
+    /* En escritorio, solo cambiamos el tamaño de fuente
+       y qué texto se muestra */
+    .btn-modal-cotizar-sm {
+        font-size: 0.9em;
+    }
+    .btn-modal-cotizar-sm .text-desktop {
+        display: inline; /* MUESTRA texto largo en escritorio */
+    }
+    .btn-modal-cotizar-sm .text-mobile {
+        display: none; /* OCULTA "Cotizar" en escritorio */
+    }
+}
+
+/* =============================================
+   BLOQUE DE FAVORITOS CORREGIDO
+   ============================================= */
+
+/* 1. La clase .is-favorite ahora apunta al SVG */
+.heart-btn-modal.is-favorite svg,
+.heart-btn.is-favorite svg {
+    /* Rellena el corazón y le da color */
+    /* Usamos "red" (rojo) como pediste */
+    fill: red; 
+    stroke: red; 
+}
+
+/* 2. La animación se aplica al BOTÓN cuando la clase está activa */
+.heart-btn-modal.is-favorite,
+.heart-btn.is-favorite {
+    animation: pulse 0.5s ease;
+}
+
+/* 3. La animación de pulso (esta se queda igual) */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* =============================================
+   ESTILOS PARA BARRA DE FILTROS AVANZADOS
+   ============================================= */
+
+/* 1. Contenedor de Búsqueda + Botón */
+/* 1. Contenedor de Búsqueda + Botón (CORREGIDO) */
+/* 1. Estilo MÓVIL (por defecto) - Apilados */
+.search-and-filter-bar {
+    display: flex;
+    flex-direction: column; /* <-- CLAVE: 'column' para apilar en móvil */
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.search-bar-container {
+    flex-grow: 1; /* Ocupa el espacio disponible */
+}
+
+/* 2. Botón de Filtros */
+.filter-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--verde-principal);
+    color: var(--blanco);
+    border: none;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+.filter-toggle-btn:hover {
+    background: var(--verde-oscuro);
+}
+
+/* 3. Panel de Filtros (oculto con max-height) */
+.advanced-filters {
+    background: var(--blanco);
+    border: 1px solid var(--gris-claro);
+    border-radius: 12px;
+    padding: 0 20px; /* Padding horizontal se queda */
+    margin-bottom: 20px;
+    
+    display: grid;
+    grid-template-columns: 1fr; /* 1 columna en móvil */
+    gap: 16px;
+    
+    /* La magia del "toggle" animado */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+/* 4. Estado ACTIVO (cuando se presiona el botón) */
+.advanced-filters.active {
+    padding: 20px; /* Añade padding vertical */
+    max-height: 500px; /* Altura suficiente para mostrar contenido */
+}
+
+.filter-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--negro);
+}
+.filter-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--gris-claro);
+    background: var(--blanco-hueso);
+    font-size: 1em;
+}
+
+/* 5. Vista de Escritorio */
+@media (min-width: 769px) {
+    .search-and-filter-bar {
+        flex-direction: row; /* Lado a lado en escritorio */
+        align-items: center;
+
+    }
+    .filter-toggle-btn {
+        flex-shrink: 0; /* El botón no se encoge */
+        width: auto;
+        padding: 14px 16px;
+    }
+    .advanced-filters {
+        grid-template-columns: 1fr 1fr; /* 2 columnas en escritorio */
+    }
+}
+
+
+/* =============================================
+   ESTILOS PARA EL SLIDER DE PRECIO
+   ============================================= */
+
+/* El texto "Precio: $0 - $1000" */
+#price-value-display {
+    font-weight: 700;
+    color: var(--negro); /* O var(--verde-principal) si prefieres */
+}
+
+/* El contenedor de la barra */
+.filter-slider {
+    -webkit-appearance: none; /* Quita estilos por defecto */
+    appearance: none;
+    width: 100%;
+    height: 8px; /* Altura de la barra */
+    background: #ddd; /* Color de la barra "vacía" */
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+}
+
+/* El "botón" (thumb) - WebKit (Chrome, Safari) */
+.filter-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px; /* Tamaño del círculo */
+    height: 20px;
+    background: #007bff; /* Color azul (puedes cambiarlo) */
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+    margin-top: -6px; /* Centra el círculo sobre la barra */
+}
+
+/* El "botón" (thumb) - Mozilla (Firefox) */
+.filter-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #007bff; /* Color azul */
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+/* =============================================
+   ESTILO MEJORADO PARA BOTÓN DE LIMPIAR FILTROS
+   ============================================= */
+
+.btn-limpiar-filtros {
+    grid-column: 1 / -1; 
+    justify-self: flex-end; /* Lo alinea a la derecha */
+    width: auto; 
+
+    /* --- ESTILO DE CONTENEDOR VISIBLE --- */
+    background: var(--blanco-hueso, #f9f9f9); /* Fondo claro */
+    color: var(--gris-oscuro, #555);         /* Texto sutil */
+    border: 1px solid var(--gris-claro, #ddd); /* Borde visible */
+
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre icono y texto */
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
+/* El icono dentro del botón */
+.btn-limpiar-filtros svg {
+    color: var(--gris-medio, #888);
+    transition: all 0.2s ease;
+}
+
+/* --- EFECTO AL PASAR EL MOUSE (HOVER) --- */
+.btn-limpiar-filtros:hover {
+    background-color: var(--blanco);
+    border-color: var(--verde-principal); /* Borde verde */
+    color: var(--verde-principal); /* Texto verde */
+}
+.btn-limpiar-filtros:hover svg {
+    color: var(--verde-principal); /* Icono verde */
+}
+
+/* --- EFECTO AL PRESIONAR (ACTIVE) --- */
+.btn-limpiar-filtros:active {
+    background-color: var(--gris-claro, #eee); /* Fondo más oscuro */
+    transform: scale(0.98); /* Efecto de clic */
+}
+
+/* =============================================
+   ESTILOS PARA BOTÓN DE FAVORITOS (NAV)
+   ============================================= */
+   .nav-favorites-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    color: var(--rosa-flor, #E91E63); 
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.nav-favorites-btn:hover {
+    background: var(--gris-claro, #f0f0f0);
+}
+.fav-badge {
+    position: absolute;
+    top: -2px;
+    right: -5px;
+    background: var(--rosa-flor, #E91E63);
+    color: var(--blanco);
+    font-size: 0.7em;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    display: none; /* Se activa con JS */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--blanco);
+}
+
+/* =============================================
+   ESTILOS PARA PANEL DE FAVORITOS
+   ============================================= */
+
+/* Overlay de fondo */
+.favorites-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.favorites-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Modal de favoritos */
+.favorites-modal {
+    position: fixed;
+    z-index: 1002;
+    background: var(--blanco-hueso, #f9f9f9);
+    
+    display: flex;
+    flex-direction: column;
+    
+    top: 50%;
+    left: 50%;
+    
+    max-height: 90vh;
+    height: 90vh;
+    width: 90vw;
+    max-width: 500px;
+    
+    border-radius: 20px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.favorites-modal.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Header */
+.favorites-header {
+    background: var(--rosa-flor, #E91E63);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.favorites-header .modal-close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.favorites-header .header-icon {
+    margin-bottom: 6px;
+}
+
+.favorites-header h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.6em;
+}
+
+.favorites-header p {
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* BODY CON SCROLL */
+.favorites-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+
+    display: flex; /* <--- NUEVO */
+    flex-wrap: wrap; /* <--- NUEVO */
+    align-content: start;
+    
+    gap: 12px;
+    padding: 16px;
+    
+    -webkit-overflow-scrolling: touch;
+}
+
+.favorites-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.favorites-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.favorites-body::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+/* Estado vacío */
+.favorites-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--gris-medio, #888);
+    grid-column: 1 / -1;
+}
+
+.favorites-empty-state svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.5;
+    margin-bottom: 20px;
+}
+
+.favorites-empty-state h3 {
+    font-size: 1.3em;
+    color: var(--negro);
+    margin: 0 0 8px 0;
+}
+
+.favorites-empty-state p {
+    margin: 0 0 24px 0;
+}
+
+.favorites-empty-state .btn-explorar {
+    background: var(--verde-principal);
+    color: var(--blanco);
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Footer */
+.favorites-footer {
+    display: flex;
+    gap: 16px;
+    padding: 16px 20px; /* Reducido */
+    background: var(--blanco);
+    border-top: 1px solid var(--gris-claro);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+    flex-grow: 0;
+    justify-content: space-around; /* Centra los botones */
+}
+
+.fav-btn {
+    /* flex: 1; <-- ELIMINADO para que no se estiren */
+    padding: 10px 16px; /* Ajustado */
+    font-size: 0.8em; /* Reducido */
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.fav-btn.btn-limpiar {
+    background: var(--blanco);
+    color: var(--negro);
+    border: 1px solid var(--gris-medio);
+}
+
+.fav-btn.btn-cotizar-todos {
+    background: var(--verde-principal);
+    color: var(--blanco);
+}
+
+/* TARJETAS DENTRO DEL PANEL */
+.favorites-body .product-card-v2,
+.favorites-body .fav-card {
+    /* Mantenemos las 2 columnas (50% - 6px de gap) */
+    width: calc(50% - 6px); 
+
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: fit-content !important;
+    max-height: none !important;
+    margin: 0 !important;
+    background: var(--blanco);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.favorites-body .card-image-container {
+    position: relative !important;
+    width: 100% !important;
+    padding-top: 85% !important;
+    flex-shrink: 0 !important;
+}
+
+.favorites-body .card-image-container img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.favorites-body .card-info-container {
+    display: flex !important;
+    flex-direction: column !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: fit-content !important;
+    flex: 1 !important;
+    padding: 10px !important; /* Reducido */
+    gap: 2px !important; /* Reducido */
+}
+
+.favorites-body .card-nombre {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-size: 1.0em !important; /* Reducido */
+    font-weight: 600 !important;
+    color: var(--negro) !important;
+    margin: 0 0 4px 0 !important;
+    line-height: 1.2 !important;
+}
+
+.favorites-body .card-descripcion {
+    display: none !important; /* OCULTO */
+}
+
+.favorites-body .card-rating {
+    display: none !important; /* OCULTO */
+}
+
+.favorites-body .card-precio {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-size: 1.3em !important;
+    font-weight: 700 !important;
+    color: var(--verde-principal) !important;
+    /* Esto es vital para empujar el precio al fondo */
+    margin: auto 0 0 0 !important; 
+}
+
+
+/* Escritorio */
+@media (min-width: 769px) {
+    .favorites-modal {
+        top: 0;
+        right: 0;
+        left: auto;
+        bottom: 0;
+        width: 400px;
+        max-width: 400px;
+        height: 100vh;
+        max-height: 100vh;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+        transform: translateX(100%) scale(1);
+        opacity: 1;
+    }
+
+    .favorites-modal.active {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    .favorites-header {
+        border-radius: 0;
+    }
+}
+
+/* =============================================
+   INTERRUPTOR PARA OCULTAR PRECIOS (CORREGIDO)
+   ============================================= */
+
+/* 1. Oculta el precio en CUALQUIER tarjeta (Catálogo Y Favoritos) */
+.precios-ocultos .card-precio {
+    display: none !important; /* <--- AÑADIDO !important para asegurar que funcione en favoritos */
+}
+
+/* 2. Oculta el bloque de precio en el Modal de Detalles */
+.precios-ocultos .modal-actions > div:first-child {
+    display: none;
+}
+
+/* 3. Re-estiliza los botones del modal (alineados a la derecha) */
+.precios-ocultos .modal-actions {
+    justify-content: flex-end; /* Alinea el contenedor de botones a la derecha */
+}
+
+/* 4. Añade espacio entre los botones del modal */
+.precios-ocultos .modal-actions .action-buttons {
+    display: flex;
+    flex-grow: 0; /* No deja que el contenedor crezca */
+    gap: 10px; /* <--- Solución al espacio entre botones */
+}
+
+/* 5. Evita que el botón "Cotizar" se estire */
+.precios-ocultos .modal-actions .btn-modal-cotizar-sm {
+    flex-grow: 0; /* <--- Solución al botón ancho */
+    justify-content: center;
+}
+
+/* =============================================
+   BOTÓN VOLVER ARRIBA
+   ============================================= */
+   .btn-volver-arriba {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 800; /* Debajo del nav y modales */
+    
+    background: var(--verde-principal);
+    color: var(--blanco);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    cursor: pointer;
+    opacity: 0; /* Oculto por defecto */
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-volver-arriba.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.btn-volver-arriba:hover {
+    background: var(--verde-oscuro);
+    transform: translateY(-2px);
 }
