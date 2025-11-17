@@ -95,7 +95,7 @@
     
     <main>
 
-        <section class="seasonal-promo-v2">
+        <section class="seasonal-promo-v2" id="promo-dia-de-muertos">
             <div class="container">
                 <div class="promo-grid">
                     <div class="promo-text">
@@ -171,6 +171,45 @@
                         <button class="carousel-button prev" aria-label="Anterior">‹</button>
                         <button class="carousel-button next" aria-label="Siguiente">›</button>
     
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="promo-seccional" id="promo-nochebuena">
+            <div class="container">
+                <div class="promo-grid">
+        
+                    <div class="promo-text">
+                        <h2 class="promo-title">Temporada de Nochebuena</h2>
+        
+                        <div class="text-desktop">
+                            <p class="promo-subtitle">¡La Navidad llega a Vivero Castillo con la flor más emblemática!</p>
+                            <p>Decora tu hogar y celebra estas fiestas con nuestras Nochebuenas de la más alta calidad, cultivadas con tradición. Ofrecemos precios de <strong>mayoreo y menudeo</strong> en una gran variedad de colores.</p>
+                        </div>
+        
+                        <div class="text-mobile">
+                            <p>Celebra con la mejor flor de Nochebuena. Ofrecemos precios de <strong>mayoreo y menudeo</strong> en todos los colores.</p>
+                        </div>
+        
+                        <div class="promo-bottom-content">
+                            <div class="promo-lottie-container">
+                                <lottie-player src="lottie/Santa Claus.json" background="transparent" speed="1" style="width: 100%;" loop autoplay></lottie-player>
+                            </div>
+        
+                            <a href="contacto.html" class="btn-hero btn-hero-primary">Cotizar por Mayoreo</a>
+                        </div>
+
+                    </div>
+        
+                    <div class="promo-carousel-container">
+                        <div class="promo-carousel">
+                            
+                            
+                        </div>
+                        <button class="carousel-button prev" aria-label="Anterior">‹</button>
+                        <button class="carousel-button next" aria-label="Siguiente">›</button>
+        
                     </div>
                 </div>
             </div>
@@ -327,73 +366,13 @@
 
     <script src="js/script.js?v=6"></script>
     <script src="js/catalogo.js?v=6"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <div id="imageModal" class="modal">
         <span class="modal-close">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
 
-    <div class="product-detail-overlay" id="productDetailOverlay"></div>
-    <div class="product-detail-modal" id="productDetailModal">
     
-        <div class="modal-content">
-            
-            <header class="modal-header">
-                <button class="modal-back-btn" id="modalCloseBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                </button>
-                <div class="modal-image-gallery">
-                    <div class="gallery-thumbnails" id="gallery-thumbnails">
-                        </div>
-                    <div class="gallery-main-image" id="gallery-main-image">
-                        </div>
-                </div>
-            </header>
-            
-            <div class="modal-body">
-                <h2 id="modal-nombre">Nombre de la Planta</h2>
-                <p id="modal-nombre-cientifico">Nombreus Cientificus</p>
-                
-                <section class="modal-actions">
-                    <div>
-                        <p class="label">Precio</p>
-                        <p class="price" id="modal-precio">$0.00</p>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="heart-btn-modal" id="modal-heart-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                        </button>
-
-                        <a href="contacto.html" class="btn-modal-cotizar-sm" id="modal-cotizar-btn"> 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            <span class="text-desktop">Cotizar este producto</span>
-                            
-                            <span class="text-mobile">Cotizar</span>
-                        
-                        </a>
-                    </div>
-                </section>
-                
-                
-                <section class="modal-info-grid" id="modal-info-grid"></section>
-                
-                <section class="modal-care-list">
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                        Cuidados Esenciales
-                    </h3>
-                    <ul id="modal-cuidados-list"></ul>
-                </section>
-                
-                <section class="modal-facts-box">
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                        Datos Interesantes
-                    </h3>
-                    <ul id="modal-datos-list"></ul>
-                </section>
-            </div>
-        </div>
-    </div>
 
     <div class="favorites-overlay" id="favoritesOverlay"></div>
     <div class="favorites-modal" id="favoritesModal">

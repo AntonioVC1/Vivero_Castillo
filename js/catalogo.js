@@ -1,6 +1,56 @@
+/* === CÓDIGO COMPLETO Y CORREGIDO PARA catalogo.js === */
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    
+    // === TAREA 1: CREAR EL HTML DEL MODAL PRIMERO ===
+    const modalHTML = `
+    <div class="product-detail-overlay" id="productDetailOverlay"></div>
+    <div class="product-detail-modal" id="productDetailModal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <button class="modal-back-btn" id="modalCloseBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <div class="modal-image-gallery">
+                    <div class="gallery-thumbnails" id="gallery-thumbnails"></div>
+                    <div class="gallery-main-image" id="gallery-main-image"></div>
+                </div>
+            </header>
+            <div class="modal-body">
+                <h2 id="modal-nombre">Nombre de la Planta</h2>
+                <p id="modal-nombre-cientifico">Nombreus Cientificus</p>
+                <section class="modal-actions">
+                    <div>
+                        <p class="label">Precio</p>
+                        <p class="price" id="modal-precio">$0.00</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="heart-btn-modal" id="modal-heart-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                        <a href="contacto.html" class="btn-modal-cotizar-sm" id="modal-cotizar-btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <span class="text-desktop">Cotizar este producto</span>
+                            <span class="text-mobile">Cotizar</span>
+                        </a>
+                    </div>
+                </section>
+                <section class="modal-info-grid" id="modal-info-grid"></section>
+                <section class="modal-care-list">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Cuidados Esenciales</h3>
+                    <ul id="modal-cuidados-list"></ul>
+                </section>
+                <section class="modal-facts-box">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Datos Interesantes</h3>
+                    <ul id="modal-datos-list"></ul>
+                </section>
+            </div>
+        </div>
+    </div>
+    `;
+    // Inyectamos el HTML en la página
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
     
     // --- INICIO FUNCIONES DE FAVORITOS ---
 
@@ -52,29 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.toggle('is-favorite', esFavorito);
         });
     }
-    // --- FIN FUNCIONES DE FAVORITOS ---
-    // --- INICIO: LÓGICA BOTÓN VOLVER ARRIBA ---
-    const btnVolverArriba = document.getElementById('btnVolverArriba');
 
-    if (btnVolverArriba) {
-        // Mostrar/Ocultar el botón
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) { // Se muestra después de 400px de scroll
-                btnVolverArriba.classList.add('visible');
-            } else {
-                btnVolverArriba.classList.remove('visible');
-            }
-        });
-
-        // Acción de clic para volver arriba
-        btnVolverArriba.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-    // --- FIN: LÓGICA BOTÓN VOLVER ARRIBA ---
     function renderFavoritos() {
         const favIDs = getFavoritos();
         
@@ -233,22 +261,32 @@ document.addEventListener('DOMContentLoaded', () => {
         closeFavoritesModal(); // Cierra el panel
     }
     
+    // --- FIN FUNCIONES DE FAVORITOS ---
+    
 
-    // --- Variables Globales del Catálogo ---
+    // === TAREA 2: BUSCAR TODOS LOS ELEMENTOS ===
+    // (Ahora que el HTML del modal YA EXISTE, podemos buscar todo)
+
+    // --- Variables Globales ---
     let todosLosProductos = [];
     let todasLasCategorias = {};
     
-    // --- Elementos del DOM del Catálogo ---
+    // --- Elementos del DOM (Página de Productos) ---
     const gridContainer = document.getElementById('product-grid');
     const filtroBotones = document.querySelectorAll('.filtro-btn');
     const searchBar = document.getElementById('search-bar');
     const productCounter = document.getElementById('product-counter');
+    const toggleFilterBtn = document.getElementById('toggle-filter-btn');
+    const advancedFiltersPanel = document.getElementById('advanced-filters-panel');
+    const sortBySelect = document.getElementById('sort-by');
+    const priceRangeSlider = document.getElementById('price-range');
+    const priceValueDisplay = document.getElementById('price-value-display');
+    const clearFiltersBtn = document.getElementById('clear-filters-btn');
 
-    // --- Elementos del Modal de Detalles ---
+    // --- Elementos del Modal de Detalles (GLOBALES) ---
     const detailModal = document.getElementById('productDetailModal');
     const detailOverlay = document.getElementById('productDetailOverlay');
     const detailCloseBtn = document.getElementById('modalCloseBtn');
-    
     const modalNombre = document.getElementById('modal-nombre');
     const modalNombreCientifico = document.getElementById('modal-nombre-cientifico');
     const modalMainImageContainer = document.getElementById('gallery-main-image');
@@ -259,14 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalDatosList = document.getElementById('modal-datos-list');
     const modalCotizarBtn = document.getElementById('modal-cotizar-btn');
     const modalHeartBtn = document.getElementById('modal-heart-btn');
-    const toggleFilterBtn = document.getElementById('toggle-filter-btn');
-    const advancedFiltersPanel = document.getElementById('advanced-filters-panel');
-    const sortBySelect = document.getElementById('sort-by');
-    const priceRangeSlider = document.getElementById('price-range');
-    const priceValueDisplay = document.getElementById('price-value-display');
-    const clearFiltersBtn = document.getElementById('clear-filters-btn');
 
-    // --- Elementos del Panel de Favoritos (Pueden no existir en todas las páginas) ---
+    // --- Elementos del Panel de Favoritos (GLOBALES) ---
     const openFavoritesBtn = document.getElementById('open-favorites-btn');
     const favoritesOverlay = document.getElementById('favoritesOverlay');
     const favoritesModal = document.getElementById('favoritesModal');
@@ -278,7 +310,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const favBadge = document.getElementById('fav-badge');
     const favCounterText = document.getElementById('fav-counter-text');
 
-    // --- Listeners de Favoritos (Solo se añaden si los botones existen) ---
+    // --- Elementos del Modal de Ampliación de Imagen (GLOBALES) ---
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = imageModal ? document.getElementById('modalImage') : null;
+    const imageModalClose = imageModal ? imageModal.querySelector(".modal-close") : null;
+    
+    // --- Botón Volver Arriba (GLOBAL) ---
+    const btnVolverArriba = document.getElementById('btnVolverArriba');
+
+
+    // === TAREA 3: AÑADIR CLICS (LISTENERS) ===
+
+    // --- Listeners del Panel de Favoritos (Globales) ---
     if (openFavoritesBtn) {
         openFavoritesBtn.addEventListener('click', openFavoritesModal);
     }
@@ -295,127 +338,127 @@ document.addEventListener('DOMContentLoaded', () => {
         quoteFavoritesBtn.addEventListener('click', cotizarTodosLosFavoritos);
     }
 
-    
-    // --- Elementos del Modal de Ampliación de Imagen (Puede no existir) ---
-    const imageModal = document.getElementById('imageModal');
-    const modalImage = imageModal ? document.getElementById('modalImage') : null;
-    const imageModalClose = imageModal ? imageModal.querySelector(".modal-close") : null;
+    // --- Listeners del Modal de Detalles (Globales) ---
+    if (modalHeartBtn) {
+        modalHeartBtn.addEventListener('click', () => {
+            const id = modalHeartBtn.dataset.productId;
+            if (id) {
+                toggleFavorito(id);
+            }
+        });
+    }
+    if (detailModal) { // <--- CORREGIDO: Usar detailOverlay
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) { 
+                cerrarModalDetalles(); 
+            }
+        });
+    }
+    if (detailCloseBtn) {
+        detailCloseBtn.addEventListener('click', cerrarModalDetalles); // Clic en el botón "X"
+    }
+
+    // --- Listener de Volver Arriba (Global) ---
+    if (btnVolverArriba) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                btnVolverArriba.classList.add('visible');
+            } else {
+                btnVolverArriba.classList.remove('visible');
+            }
+        });
+        btnVolverArriba.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // --- Lógica del Modal de Ampliación (Global) ---
+    if (imageModalClose) {
+        imageModalClose.addEventListener('click', () => {
+            if (imageModal) imageModal.classList.remove('active');
+        });
+    }
+    if (imageModal) {
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+            }
+        });
+    }
 
 
     // --- INICIO: CÓDIGO SOLO PARA LA PÁGINA DE CATÁLOGO ---
-    // Comprobamos si 'gridContainer' existe.
-    // Si no existe, todo este bloque de código se omitirá, evitando errores.
+    // (Estas acciones solo se añaden si estamos en productos.html)
     if (gridContainer) {
 
         // --- CÓDIGO AÑADIDO PARA OCULTAR FILTRO DE PRECIO ---
         if (document.body.classList.contains('precios-ocultos')) {
-            // Busca el <label> del filtro de precio
             const priceFilterLabel = document.querySelector('label[for="price-range"]');
             if (priceFilterLabel) {
-                // Oculta el <div> padre que contiene el filtro
                 priceFilterLabel.parentElement.style.display = 'none';
             }
-        }
-        // --- FIN DEL CÓDIGO AÑADIDO ---
-
-
-        // Listener para el botón de corazón del MODAL
-        if (modalHeartBtn) {
-            modalHeartBtn.addEventListener('click', () => {
-                // El 'dataset.productId' lo asignaremos en la función mostrarModal
-                const id = modalHeartBtn.dataset.productId;
-                if (id) {
-                    toggleFavorito(id);
-                }
-            });
         }
 
         // Listener para el slider de precio
         if(priceRangeSlider) {
             
-            // Función para actualizar el fondo azul
             function updateSliderBackground() {
-                if (!priceRangeSlider) return; // Comprobación por si acaso
+                if (!priceRangeSlider) return;
                 const maxPrice = priceRangeSlider.value;
                 const percentage = (maxPrice - priceRangeSlider.min) / (priceRangeSlider.max - priceRangeSlider.min) * 100;
-                const sliderColor = '#007bff'; // Mismo color azul del CSS
-                
+                const sliderColor = '#007bff';
                 priceRangeSlider.style.background = `linear-gradient(to right, ${sliderColor} ${percentage}%, #ddd ${percentage}%)`;
             }
 
             priceRangeSlider.addEventListener('input', () => {
-                // 1. Actualiza el texto "Precio: $0 - $..."
                 if (priceValueDisplay) {
                     priceValueDisplay.textContent = `$0 - $${priceRangeSlider.value}`;
                 }
-                // 2. Actualiza el fondo del slider
                 updateSliderBackground();
-
-                // 3. Llama a la función de filtrado
                 filtrarYDibujar();
             });
-
-            // Llama a la función una vez al cargar la página
             updateSliderBackground();
         }
 
         // Listener para el dropdown de "Ordenar por"
         if(sortBySelect) {
             sortBySelect.addEventListener('change', () => {
-                // Llama a la función de filtrado
                 filtrarYDibujar();
             });
         }
         if (clearFiltersBtn) {
             clearFiltersBtn.addEventListener('click', () => {
-                
-                // 1. Resetear filtros avanzados (Dropdown y Slider)
                 if (sortBySelect) sortBySelect.value = 'default';
                 if (priceRangeSlider) priceRangeSlider.value = priceRangeSlider.max; 
-        
-                // 2. Actualizar visualmente el slider
                 if (priceValueDisplay) priceValueDisplay.textContent = `$0 - $${priceRangeSlider.max}`; 
                 const percentage = 100;
-                const sliderColor = '#007bff'; // El color azul que definimos
-                
+                const sliderColor = '#007bff';
                 if (priceRangeSlider) priceRangeSlider.style.background = `linear-gradient(to right, ${sliderColor} ${percentage}%, #ddd ${percentage}%)`;
-        
-                // 3. Volver a dibujar (SIN tocar los chips ni la búsqueda)
                 filtrarYDibujar();
             });
         }
 
         // Listener para el botón de filtros
-        if(toggleFilterBtn) { // Buena práctica verificar que existe
+        if(toggleFilterBtn) {
             toggleFilterBtn.addEventListener('click', () => {
                 if (advancedFiltersPanel) advancedFiltersPanel.classList.toggle('active');
             });
         }
 
-        // Listeners para cerrar el modal de detalles
-        if (detailModal) {
-            detailModal.addEventListener('click', (e) => {
-                if (e.target === detailModal) {
-                    cerrarModalDetalles();
-                }
+        // Listeners para los botones de filtros (chips)
+        if (filtroBotones) {
+            filtroBotones.forEach(boton => {
+                boton.addEventListener('click', () => {
+                    filtroBotones.forEach(btn => btn.classList.remove('active'));
+                    boton.classList.add('active');
+                    filtrarYDibujar();
+                });
             });
-        }
-        if (detailCloseBtn) {
-            detailCloseBtn.addEventListener('click', cerrarModalDetalles);
         }
 
-        // --- Lógica del Modal de Ampliación ---
-        if (imageModalClose) {
-            imageModalClose.addEventListener('click', () => {
-                if (imageModal) imageModal.classList.remove('active');
-            });
-        }
-        if (imageModal) {
-            imageModal.addEventListener('click', (e) => {
-                if (e.target === imageModal) {
-                    imageModal.classList.remove('active');
-                }
-            });
+        // Listener para la barra de búsqueda
+        if (searchBar) {
+            searchBar.addEventListener('input', filtrarYDibujar);
         }
     
     }
@@ -502,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Rellena el modal con los datos del producto y lo muestra
      */
     function mostrarModalConProducto(producto) {
-        if (!detailModal) return; // Salir si no estamos en la pág de catálogo
+        if (!detailModal) return; // Salir si el modal no existe
 
         // Rellenar textos
         modalNombre.textContent = producto.nombre;
@@ -597,18 +640,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // --- LÓGICA DE BOTONES (ACTUALIZADA) ---
-
-        // 1. Botón de Cotizar
+        // --- LÓGICA DE BOTONES ---
         const nombreProductoCodificado = encodeURIComponent(producto.nombre);
         modalCotizarBtn.href = `contacto.html?producto=${nombreProductoCodificado}`;
-
-        // 2. Botón de Corazón
         modalHeartBtn.dataset.productId = producto.id;
         const esFavorito = getFavoritos().includes(producto.id);
         modalHeartBtn.classList.toggle('is-favorite', esFavorito);
-
-        // --- FIN DE LÓGICA DE BOTONES ---
         
         // Mostrar el modal
         detailOverlay.classList.add('active');
@@ -638,10 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. OBTENER TODOS LOS VALORES DE LOS FILTROS
         const categoriaActivaBtn = document.querySelector('.filtro-btn.active');
         const categoriaActiva = categoriaActivaBtn ? categoriaActivaBtn.getAttribute('data-categoria') : 'todos';
-        
         const terminoBusqueda = searchBar ? searchBar.value.toLowerCase() : '';
-        
-        // ⬇️ Obtiene los valores de los nuevos filtros ⬇️
         const sortBy = sortBySelect ? sortBySelect.value : 'default';
         const maxPrice = priceRangeSlider ? parseInt(priceRangeSlider.value, 10) : 99999;
         
@@ -689,6 +723,65 @@ document.addEventListener('DOMContentLoaded', () => {
         dibujarProductos(productosFiltrados);
     }
 
+    // --- FUNCIÓN PARA EL NUEVO CARRUSEL DE NOCHEBUENA ---
+    function dibujarCarouselNochebuena() {
+        const idsNochebuena = ['temp-004', 'temp-005', 'temp-006'];
+        const carouselContainer = document.querySelector('#promo-nochebuena .promo-carousel');
+        
+        if (!carouselContainer) {
+            return; 
+        }
+        if (!todosLosProductos || todosLosProductos.length === 0) {
+            console.warn('Productos no cargados, no se puede dibujar el carrusel');
+            return;
+        }
+        
+        const productosNochebuena = todosLosProductos.filter(p => idsNochebuena.includes(p.id));
+        const favoritosActuales = getFavoritos();
+
+        productosNochebuena.forEach(producto => {
+            const card = document.createElement('div');
+            card.classList.add('product-card-v2');
+            
+            card.addEventListener('click', () => {
+                mostrarModalConProducto(producto);
+            });
+
+            let estrellasHTML = '';
+            for (let i = 0; i < 5; i++) {
+                estrellasHTML += `<svg class="${i < producto.popularidad ? 'star-filled' : 'star-empty'}" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+            }
+            
+            const primeraImagen = producto.imagenes[0];
+            const esFavorito = favoritosActuales.includes(producto.id);
+
+            card.innerHTML = `
+                <div class="card-image-container">
+                    <img src="${primeraImagen}" alt="${producto.nombre}">
+                    <button class="heart-btn ${esFavorito ? 'is-favorite' : ''}" aria-label="Añadir a favoritos" data-product-id="${producto.id}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </button>
+                </div>
+                <div class="card-info-container">
+                    <h3 class="card-nombre">${producto.nombre}</h3>
+                    <p class="card-descripcion">${producto.nombreCientifico || ''}</p>
+                    <div class="card-rating">
+                        ${estrellasHTML}
+                    </div>
+                    <span class="card-precio">$${producto.precio.toFixed(2)}</span>
+                </div>
+            `;
+            
+            const heartBtn = card.querySelector('.heart-btn');
+            heartBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleFavorito(producto.id);
+            });
+
+            carouselContainer.appendChild(card);
+        });
+    }
+
     /**
      * Carga inicial de productos desde el JSON
      */
@@ -700,7 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             todasLasCategorias = data;
             
-            // Esta parte es necesaria en TODAS las páginas para que el panel de favoritos funcione
+            // Esta parte es necesaria en TODAS las páginas
             let tempTodosLosProductos = [];
             for (const categoria in data) {
                 data[categoria].forEach(producto => {
@@ -714,56 +807,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             todosLosProductos = tempTodosLosProductos;
 
-            // MODIFICADO: Comprobar si estamos en la página del catálogo
-            const catalogGrid = document.getElementById('product-grid');
-            if (catalogGrid) {
-                // Si SÍ estamos, dibujamos el catálogo y asignamos listeners
+            // Si SÍ estamos en la pág. de catálogo, dibujamos el grid
+            if (gridContainer) {
                 filtrarYDibujar();
-
-                if (filtroBotones) {
-                    filtroBotones.forEach(boton => {
-                        boton.addEventListener('click', () => {
-                            filtroBotones.forEach(btn => btn.classList.remove('active'));
-                            boton.classList.add('active');
-                            filtrarYDibujar();
-                        });
-                    });
-                }
-                if (searchBar) {
-                    searchBar.addEventListener('input', filtrarYDibujar);
-                }
             }
 
-            // MODIFICADO: Esta parte se ejecuta en TODAS las páginas
+            // --- LLAMADAS GLOBALES (se ejecutan en TODAS las páginas) ---
+            
+            // 1. Dibuja el carrusel de Nochebuena (si existe en la página)
+            dibujarCarouselNochebuena();
+            
+            // 2. Actualiza el contador de favoritos del nav
             const initialFavs = getFavoritos();
-            if (favBadge) { // Comprobación de seguridad
+            if (favBadge) {
                 favBadge.textContent = initialFavs.length;
                 favBadge.style.display = initialFavs.length > 0 ? 'flex' : 'none';
             }
             
-            // --- CÓDIGO PEGADO AQUÍ (EL LUGAR CORRECTO) ---
-            // Revisa la URL y abre el panel DESPUÉS de cargar todo
+            // 3. Revisa si la URL pide abrir favoritos
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.get('ver') === 'favoritos') {
-                    // Ya no necesitamos setTimeout, los productos están listos
                     openFavoritesModal();
                 }
             } catch (e) {
                 console.error('Error al leer URL params:', e);
             }
-            // --- FIN DEL CÓDIGO PEGADO ---
 
         } catch (error) {
             console.error('Error al cargar productos:', error);
-            // MODIFICADO: Solo mostrar error si el contador existe
             if (productCounter) {
                 productCounter.textContent = 'Error al cargar el catálogo.';
             }
         }
     }
     
+    // === TAREA 4: EJECUTAR TODO ===
     cargarProductos();
-    
     
 });

@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap');
 :root {
     /* Colores Principales */
     --verde-principal: #1B7C3D;
@@ -1053,6 +1057,170 @@ nav {
     .carousel-button.prev { left: 0; }
     .carousel-button.next { right: 0; }
 }
+
+/* ==========================================================
+   DISEÑO FINAL - SECCIÓN NOCHEBUENA (CORREGIDO v2)
+   ========================================================== */
+   #promo-nochebuena {
+    padding: 180px 20px 80px;
+    background-color: #610202;
+    position: relative;
+    overflow: hidden;   
+}
+#promo-nochebuena::before { 
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 160px; /* Altura para móvil (COINCIDE con el padding-top) */
+    background-image: url('../images/adornos/borde.webp'); 
+    
+    
+    background-size: 200px 160px; 
+    
+    background-repeat: repeat-x; /* Repite horizontalmente */
+    background-position: top center; 
+    
+    opacity: 0.9; 
+}
+
+#promo-nochebuena .promo-text {
+    text-align: center;
+    color: var(--blanco);
+    margin-bottom: 40px; 
+}
+
+/* Nuevo contenedor para Lottie y botón */
+#promo-nochebuena .promo-bottom-content {
+    display: flex;
+    flex-direction: row; /* <-- CORREGIDO: En fila por defecto (móvil) */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar el par en móvil */
+    gap: 15px; /* Espacio entre ellos */
+    margin-top: 25px;
+}
+
+/* Contenedor para la animación Lottie (Móvil) */
+#promo-nochebuena .promo-lottie-container {
+    max-width: 150px; /* Tamaño del lottie en móvil */
+    width: 100%;
+    margin: 0;
+    flex-shrink: 0; /* Evita que el Lottie se encoja */
+}
+
+/* Botón "Cotizar" (Móvil) - hacerlo más pequeño */
+#promo-nochebuena .promo-bottom-content .btn-hero {
+    padding: 12px 20px; /* <-- Botón más pequeño */
+    font-size: 0.9em; /* <-- Letra más pequeña */
+    margin-top: 0;
+    flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+#promo-nochebuena .promo-title {
+    font-family: "MonteCarlo", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3.4em;
+    color: #E6C147;
+    margin-bottom: 20px;
+    line-height: 1;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+#promo-nochebuena .promo-carousel-container { width: 100%; margin: 0 auto; position: relative; }
+#promo-nochebuena .promo-carousel { display: flex; gap: 20px; padding: 10px; overflow-x: scroll; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+#promo-nochebuena .promo-carousel::-webkit-scrollbar { display: none; }
+#promo-nochebuena .carousel-card { flex: 0 0 75%; height: 320px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+#promo-nochebuena .carousel-card:hover { transform: translateY(-5px); }
+#promo-nochebuena .carousel-card img { width: 100%; height: 100%; object-fit: cover; }
+#promo-nochebuena .card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 20px 20px; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); color: var(--blanco); }
+#promo-nochebuena .card-overlay h3 { font-size: 1.5em; font-weight: 600; margin: 0 0 5px 0; }
+#promo-nochebuena .card-overlay p { font-size: 1em; margin: 0; opacity: 0.9; }
+#promo-nochebuena .carousel-button {
+    position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.9);
+    border: none; border-radius: 50%; width: 35px; height: 35px; font-size: 20px; font-weight: bold;
+    color: #333; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 10; transition: all 0.2s ease;
+}
+#promo-nochebuena .carousel-button:hover { background-color: var(--blanco); transform: translateY(-50%) scale(1.1); }
+#promo-nochebuena .carousel-button.prev { left: 15px; }
+#promo-nochebuena .carousel-button.next { right: 15px; }
+
+
+/* --- ESTILOS QUE SE APLICAN SOLO EN PANTALLAS ANCHAS (ESCRITORIO) --- */
+@media (min-width: 769px) {
+    
+    #promo-nochebuena { padding-top: 170px; 
+        padding-bottom: 20px; /* <-- Prueba con 40px y ajusta a tu gusto */
+    
+    }
+
+    #promo-nochebuena::before {
+        height: 160px; /* <-- Debe coincidir con el padding-top */
+        background-size: 250px 160px; /* <-- Ancho proporcional a la nueva altura */
+    }
+
+    #promo-nochebuena .promo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    #promo-nochebuena .promo-text { text-align: left; margin-bottom: 0; }
+    #promo-nochebuena .promo-title { font-size: 4.2em; }
+
+    /* Ajustamos el nuevo contenedor en escritorio */
+    #promo-nochebuena .promo-bottom-content {
+        justify-content: flex-start; /* Alineados a la izquierda */
+        margin-top: 30px;
+        gap: 20px; /* Un poco más de espacio en desktop */
+    }
+
+    /* Más grande la animación en escritorio */
+    #promo-nochebuena .promo-lottie-container {
+        max-width: 250px; /* <-- CORREGIDO: Más grande */
+    }
+    
+    /* Restaurar tamaño del botón en escritorio */
+    #promo-nochebuena .promo-bottom-content .btn-hero {
+        padding: 15px 35px; /* <-- Tamaño original de .btn-hero */
+        font-size: 1em; /* <-- Tamaño original */
+    }
+    
+    #promo-nochebuena .promo-text,
+    #promo-nochebuena .promo-carousel-container {
+        min-width: 0;
+    }
+    
+    #promo-nochebuena .carousel-card { flex: 0 0 280px; height: 350px; }
+    #promo-nochebuena .carousel-button { width: 40px; height: 40px; font-size: 24px; }
+    #promo-nochebuena .carousel-button.prev { left: 0; }
+    #promo-nochebuena .carousel-button.next { right: 0; }
+}
+
+/* =============================================
+   CONTROL DE TEMPORADA
+   ============================================= */
+
+/* Para mostrar Nochebuena (configuración actual): */
+#promo-dia-de-muertos {
+    display: none;
+}
+#promo-nochebuena {
+    display: block; /* O 'grid' en desktop, pero 'block' funciona */
+}
+
+/* Para mostrar Día de Muertos (el próximo año):
+   
+   #promo-dia-de-muertos {
+       display: block;
+   }
+   #promo-nochebuena {
+       display: none;
+   }
+*/
+
 /* =============================================
    ESTILOS PARA EL MODAL DE IMÁGENES (LIGHTBOX)
    ============================================= */
@@ -2580,4 +2748,32 @@ nav {
 .btn-volver-arriba:hover {
     background: var(--verde-oscuro);
     transform: translateY(-2px);
+}
+
+
+/* =============================================
+   AJUSTES PARA CARRUSEL CON TARJETAS DINÁMICAS
+   ============================================= */
+
+/* * Esto ajusta el carrusel de Nochebuena para que acepte
+ * las tarjetas .product-card-v2 del catálogo.
+ */
+ #promo-nochebuena .promo-carousel .product-card-v2 {
+    /* * Define el ancho de la tarjeta en el carrusel.
+     * 70% en móvil, con un máximo de 250px.
+     */
+    flex: 0 0 70%; 
+    max-width: 250px;
+    height: auto; /* La altura será automática */
+    margin-bottom: 10px; /* Espacio para la sombra */
+}
+
+/* * En escritorio, les damos un tamaño fijo, similar
+ * a como lo tenías en el carrusel de Día de Muertos.
+ */
+@media (min-width: 769px) {
+    #promo-nochebuena .promo-carousel .product-card-v2 {
+        flex-basis: 280px; 
+        max-width: 280px;
+    }
 }
